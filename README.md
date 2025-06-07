@@ -28,7 +28,6 @@ Your army is seeking the entrance to hell itself but the gods do not want you to
 - Languages: English
 - Game control: Mouse, Touchscreen
 - Special things: One button
-- Game control:	Keyboard, Gamepad, XBox controller (?) 
 - UWP app : Min Win. SDK is 10240, Main Win. SDK is 19041  
 
 ## Status of UWP porting
