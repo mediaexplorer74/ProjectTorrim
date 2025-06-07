@@ -14,6 +14,10 @@ Place down and manage your army to defend against the hoard of evil ones. They w
 
 Your army is seeking the entrance to hell itself but the gods do not want you to find it. As the expedition reaches closer, mythical legends are summoned to stop you with their hoards of corrupted creatures. Will you be able to beat them all?
 
+## Screenshots
+![](Images/sshot01.png)
+![](Images/sshot02.png)
+
 ## Tech. details
 - Published:	 Apr 19, 2021
 - State: 	Released
@@ -42,7 +46,7 @@ If you find a bug please report it in the form here: Bug Report Form: https://do
 ## References
 - https://skeffles.itch.io/ Skeffles (C# / Game developer)
 - https://skeffles.itch.io/project-torrim Project Torrim (Tower Defence)
-- https://www.youtube.com/watch?v=Lt7a13pFH8o&list=PLWxJt3IMAUPtIyPT9qNvq-v62Zm-jLV4G
+- https://www.youtube.com/watch?v=Lt7a13pFH8o&list=PLWxJt3IMAUPtIyPT9qNvq-v62Zm-jLV4G GameDev "video-backlog" (from skeffles)
 
 
 ## ToDo

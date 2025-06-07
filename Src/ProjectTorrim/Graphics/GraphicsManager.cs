@@ -77,7 +77,7 @@ namespace BrawlerSource.Graphics
       this.IsFullScreen = false;
       this.ApplyChanges();
       this.Game.Window.AllowUserResizing = true;
-      this.Game.Window.IsBorderless = false;
+      //this.Game.Window.IsBorderless = false;
       this.ScreenResize();
     }
   }

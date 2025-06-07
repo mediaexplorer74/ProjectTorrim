@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
   <Identity Name="ME.ProjectTorrimV1" Publisher="CN=Admin" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="4327289f-dc82-4e66-99ad-62ce2ff1a5b9" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <mp:PhoneIdentity PhoneProductId="4327289f-dc82-4e66-99ad-82ce23f1a519" PhonePublisherId="50300341-6564-4035-4641-801280359009" />
   <Properties>
     <DisplayName>Project Torrim v1.0</DisplayName>
     <PublisherDisplayName>Admin</PublisherDisplayName>
