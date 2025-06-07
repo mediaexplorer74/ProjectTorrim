@@ -18,7 +18,9 @@ namespace BrawlerSource.Collision.Intersections
     {
       get
       {
-        return !(this.myPosition != (Position) null) ? this.myPosition : this.myPosition - this.CentreOffset;
+        return !(this.myPosition != (Position) null) 
+                    ? this.myPosition 
+                    : this.myPosition - this.CentreOffset;
       }
       set => this.myPosition = value;
     }
@@ -137,7 +139,9 @@ namespace BrawlerSource.Collision.Intersections
 
     public Position GetClosestEdge(Vector2 v)
     {
-      return new Position((double) v.X > 0.0 ? this.Left : ((double) v.X < 0.0 ? this.Right : 0.0f), (double) v.Y > 0.0 ? this.Top : ((double) v.Y < 0.0 ? this.Bottom : 0.0f));
+      return new Position((double) v.X > 0.0 ? this.Left 
+          : ((double) v.X < 0.0 ? this.Right : 0.0f), 
+          (double) v.Y > 0.0 ? this.Top : ((double) v.Y < 0.0 ? this.Bottom : 0.0f));
     }
   }
 }

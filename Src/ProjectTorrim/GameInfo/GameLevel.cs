@@ -9,7 +9,7 @@ namespace BrawlerSource.GameInfo
 {
   public class GameLevel : Level
   {
-    public int Score = 250;
+    public int Score = 1000000;//250; // dirty hack :)
     private string myProfile;
 
     public GameLevel(Game1 game, string profile)

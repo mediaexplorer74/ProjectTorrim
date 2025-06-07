@@ -29,11 +29,13 @@ namespace BrawlerSource.Framework.LevelEditor
         {
             List<TileInfo> tileInfoList = new List<TileInfo>();
             //TODO
-            /*foreach (Assembly assembly in AssemblyLoadContext.Default.Assemblies) // Replace AppDomain.CurrentDomain.GetAssemblies() with AssemblyLoadContext.Default.Assemblies
+            //foreach (Assembly assembly in /*AppDomain.CurrentDomain.GetAssemblies()*/
+            //    Assemblies)
+            Assembly assembly = default;
             {
                 foreach (Type type in assembly.GetTypes())
                 {
-                    if (type.GetCustomAttributes(typeof(PrefabAttribute), true).Length != 0)
+                    /*if (type.GetCustomAttributes(typeof(PrefabAttribute), true).Length != 0)
                     {
                         foreach (Type type2 in assembly.GetTypes())
                         {
@@ -45,11 +47,30 @@ namespace BrawlerSource.Framework.LevelEditor
                                 tileInfoList.Add(customAttribute2.Info);
                             }
                         }
+                        foreach (Type type4 in assembly.GetTypes())
+                        {
+                            if (type.GetCustomAttributes(typeof(PrefabAttribute), true).Length != 0)
+                            {
+                                foreach (Type type2 in assembly.GetTypes())
+                                {
+                                    // Replace 'type.GetCustomAttributes' with 'Attribute.GetCustomAttributes'
+                                    var attributes = Attribute.GetCustomAttributes(type2, typeof(PrefabAttribute), true);
+                                    if (attributes.Length != 0)
+                                    {
+                                        PrefabAttribute customAttribute2 = (PrefabAttribute)attributes[0];
+                                        tileInfoList.Add(customAttribute2.Info);
+                                    }
+                                }
+                                // Fix CS1929 by using the correct method from CustomAttributeExtensions
+                                PrefabAttribute customAttribute = (PrefabAttribute)type.GetCustomAttribute(typeof(PrefabAttribute), true);
+                                tileInfoList.Add(customAttribute.Info);
+                            }
+                        }
                         PrefabAttribute customAttribute = (PrefabAttribute)Attribute.GetCustomAttribute(type, typeof(PrefabAttribute));
                         tileInfoList.Add(customAttribute.Info);
-                    }
+                    }*/
                 }
-            }*/
+            }
             List<string> stringList = new List<string>();
             stringList.Add(this.Game.Content.RootDirectory + "\\Sprites");
             for (int index = 0; index < stringList.Count; ++index)

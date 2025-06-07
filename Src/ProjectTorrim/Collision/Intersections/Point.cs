@@ -53,6 +53,9 @@ namespace BrawlerSource.Collision.Intersections
       return new Tuple<Position, Position>(this.Position, this.Position);
     }
 
-    public Position GetClosestEdge(Vector2 v) => throw new NotImplementedException();
+    public Position GetClosestEdge(Vector2 v)
+    {
+        throw new NotImplementedException();
+    }
   }
 }

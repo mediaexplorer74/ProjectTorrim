@@ -36,7 +36,8 @@ namespace BrawlerSource.Menu
       {
         this.myIsNewMode = value;
         foreach (string key in this.myProfileButtons.Keys)
-          this.myProfileButtons[key].IsDisabled = !this.myIsNewMode && !File.Exists(string.Format(this.myGameSave, (object) key));
+          this.myProfileButtons[key].IsDisabled = !this.myIsNewMode 
+                        && !File.Exists(string.Format(this.myGameSave, (object) key));
       }
     }
 

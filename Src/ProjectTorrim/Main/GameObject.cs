@@ -14,29 +14,31 @@ using System.Reflection;
 #nullable disable
 namespace BrawlerSource
 {
-  public class GameObject : IGameComponent, IUpdateable, IComparable<GameObject>
+  public class GameObject : IGameComponent//, IUpdateable, IComparable<GameObject>
   {
     private List<Type> myTypes;
     private bool myIsDisposed;
     private bool myToDispose;
     public bool IsNew;
 
-        public List<Type> GetTypes()
+    public List<Type> GetTypes()
+    {
+        if (this.myTypes == null)
         {
-            if (this.myTypes == null)
+            Type type = this.GetType();
+            this.myTypes = ((IEnumerable<Type>)type.GetTypeInfo().Assembly.GetTypes()).Where<Type>(
+            (assemblyType =>
             {
-                Type type = this.GetType();
-                // Use TypeInfo to access IsClass and IsAbstract properties
-                this.myTypes = ((IEnumerable<Type>)type.GetTypeInfo().Assembly.GetTypes()).Where<Type>((Func<Type, bool>)(assemblyType =>
-                {
-                    TypeInfo typeInfo = assemblyType.GetTypeInfo(); // Get TypeInfo for the type
-                    if (!typeInfo.IsClass || typeInfo.IsAbstract) // Access IsClass and IsAbstract via TypeInfo
-                        return false;
-                    return /*type.IsSubclassOf(assemblyType) ||*/ type == assemblyType;
-                })).ToList<Type>();
-            }
-            return this.myTypes;
+                TypeInfo typeInfo = assemblyType.GetTypeInfo(); // Get TypeInfo for the type
+                if (!typeInfo.IsClass || typeInfo.IsAbstract) // Access IsClass and IsAbstract via TypeInfo
+                    return false;
+
+                // Use TypeInfo.IsSubclassOf instead of Type.IsSubclassOf
+                return typeInfo.IsSubclassOf(type) || typeInfo.Equals(type.GetTypeInfo());
+            })).ToList<Type>();
         }
+        return this.myTypes;
+    }
 
   
     public Random Random { get; private set; }
@@ -69,7 +71,9 @@ namespace BrawlerSource
     {
       this.Layer = layer ?? parent.Layer;
       this.Parent = parent;
-      (this.Parent == null ? (Collection<GameObject>) this.Layer.GameObjects : (Collection<GameObject>) this.Parent.SubGameObjects).Add(this);
+      (this.Parent == null 
+                ? this.Layer.GameObjects 
+                : this.Parent.SubGameObjects).Add(this);
       this.Level = this.Layer.Level;
       this.Game = this.Level.Game;
       this.SubGameObjects = new GameObjectCollection();
@@ -94,7 +98,8 @@ namespace BrawlerSource
     {
       if (this.myIsDisposed)
         return;
-      (this.Parent == null ? (Collection<GameObject>) this.Layer.GameObjects : (Collection<GameObject>) this.Parent.SubGameObjects).Remove(this);
+      (this.Parent == null ? (Collection<GameObject>) this.Layer.GameObjects : 
+              this.Parent.SubGameObjects).Remove(this);
       this.SubGameObjects.RemoveAll();
       this.Layer.GameObjects.Remove(this);
       this.myIsDisposed = true;
