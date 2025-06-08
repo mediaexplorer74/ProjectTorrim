@@ -12,11 +12,11 @@ namespace BrawlerSource.Graphics
 {
   public class GraphicsManager : GraphicsDeviceManager
   {
-    public BrawlerGame Game;
+    public Game1 Game;
 
     public event EventHandler OnScreenResize;
 
-    public GraphicsManager(BrawlerGame game)
+    public GraphicsManager(Game1 game)
       : base((Microsoft.Xna.Framework.Game) game)
     {
       this.Game = game;
@@ -45,7 +45,7 @@ namespace BrawlerSource.Graphics
       this.IsFullScreen = true;
       this.ApplyChanges();
       this.Game.Window.AllowUserResizing = false;
-      this.Game.Window.IsBorderless = false;
+      //this.Game.Window.IsBorderless = false;
       this.ScreenResize();
     }
 
@@ -58,8 +58,8 @@ namespace BrawlerSource.Graphics
       this.IsFullScreen = false;
       this.ApplyChanges();
       this.Game.Window.AllowUserResizing = false;
-      this.Game.Window.IsBorderless = true;
-      this.Game.Window.Position = new Point(0, 0);
+      //this.Game.Window.IsBorderless = true;
+      //this.Game.Window.Position = new Point(0, 0);
       this.ScreenResize();
     }
 
@@ -77,7 +77,7 @@ namespace BrawlerSource.Graphics
       this.IsFullScreen = false;
       this.ApplyChanges();
       this.Game.Window.AllowUserResizing = true;
-      this.Game.Window.IsBorderless = false;
+      //this.Game.Window.IsBorderless = false;
       this.ScreenResize();
     }
   }

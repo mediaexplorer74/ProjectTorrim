@@ -14,7 +14,9 @@ namespace BrawlerSource.Collision
   public class ClickableCollider : Collider
   {
     private InputEvents myInput;
-    private Dictionary<KeyValuePair<List<MouseButtons>, InputType>, MouseFunction> myMouseFunctions = new Dictionary<KeyValuePair<List<MouseButtons>, InputType>, MouseFunction>();
+    private Dictionary<KeyValuePair<List<MouseButtons>, InputType>, MouseFunction> 
+            myMouseFunctions = new Dictionary<KeyValuePair<List<MouseButtons>, InputType>, 
+                MouseFunction>();
     private Dictionary<List<MouseButtons>, InputType> myPreviousActiveButtons;
     private Dictionary<List<MouseButtons>, InputType> myActiveButtons;
 

@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Windows.Storage;
 //using System.Text.Json;
 
 #nullable disable
@@ -51,7 +52,8 @@ namespace BrawlerSource.Framework.LevelEditor
 
     public void AddGrid()
     {
-      this.myGrids.Add(new Grid((GameObject) this, this.Index, this.myMaxIndex, this.mySize / (float) this.GridScale, this.GridScale, this.IsTileMode));
+      this.myGrids.Add(new Grid((GameObject) this, this.Index, this.myMaxIndex, 
+          this.mySize / (float) this.GridScale, this.GridScale, this.IsTileMode));
     }
 
     public void IncreaseGridScale(object sender, MouseEventArgs e) => this.GridScale *= 2;
@@ -120,13 +122,16 @@ namespace BrawlerSource.Framework.LevelEditor
 
     public void Save()
     {
-        // Fix for CS0308: Use the correct Serialize method without type arguments
-        string str = JsonConvert.SerializeObject(this.GetProperties(), Formatting.Indented);
-
-        // Fix for CS0246: Remove usage of JsonSerializerOptions as it is not part of Newtonsoft.Json
-        StreamWriter streamWriter = new StreamWriter("save.json");
-        streamWriter.WriteLine(str);
-        streamWriter.Close();
+        StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
+        using (FileStream fileStream = new FileStream(
+            System.IO.Path.Combine(appdataFolder.Path, "save.json"), 
+            FileMode.Create, 
+            FileAccess.Write))
+        using (StreamWriter streamWriter = new StreamWriter(fileStream))
+        {
+            string str = JsonConvert.SerializeObject(this.GetProperties(), Formatting.Indented);
+            streamWriter.WriteLine(str);
+        }
     }
 
     public void Load(object sender, KeyEventArgs e) => this.Load();
@@ -135,9 +140,12 @@ namespace BrawlerSource.Framework.LevelEditor
 
     public void Load()
     {
+      StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
       this.ClearAll();
       --this.Index;
-      this.SetProperties(JsonConvert.DeserializeObject<MultiGridProperties>(File.ReadAllText("save.json")));
+      this.SetProperties(JsonConvert.DeserializeObject<MultiGridProperties>(
+          File.ReadAllText(
+             System.IO.Path.Combine(appdataFolder.Path, "save.json"))));
     }
 
     public MultiGridProperties GetProperties()

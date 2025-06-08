@@ -1,245 +1,353 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!--Project was exported from assembly: C:\Users\Admin\Desktop\RE\ProjectTorrim\Project Torrim.exe-->
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B9767D1E-3871-4CCC-BDDE-C449AAE02768}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{24B7D6C0-0ED3-4689-9846-078BFAF5BDC2}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProjectTorrim</RootNamespace>
     <AssemblyName>ProjectTorrim</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
-    <RootNamespace>BrawlerSource</RootNamespace>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>ProjectTorrim_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <MonoGamePlatform>WindowsStoreApp</MonoGamePlatform>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>
+    </PackageCertificateThumbprint>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <LangVersion>latest</LangVersion>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>BrawlerSourceWindows.Program</StartupObject>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UAP;CODE_ANALYSIS;AUDIO;SHADER_EFFECTS</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP;CODE_ANALYSIS;AUDIO;SHADER_EFFECTS</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETFX_CORE;WINDOWS_UAP;CODE_ANALYSIS;AUDIO;CODE_ANALYSIS;CODE_ANALYSIS;SHADER_EFFECTS</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP;CODE_ANALYSIS;SHADER_EFFECTS;AUDIO</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework, Version=3.7.1.189, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\MonoGame.Framework.WindowsDX.3.7.1.189\lib\net45\MonoGame.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>packages\SharpDX.4.0.1\lib\net45\SharpDX.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct2D1, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>packages\SharpDX.Direct2D1.4.0.1\lib\net45\SharpDX.Direct2D1.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D11, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>packages\SharpDX.Direct3D11.4.0.1\lib\net45\SharpDX.Direct3D11.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D9, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>packages\SharpDX.Direct3D9.4.0.1\lib\net45\SharpDX.Direct3D9.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.DXGI, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>packages\SharpDX.DXGI.4.0.1\lib\net45\SharpDX.DXGI.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Mathematics, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>packages\SharpDX.Mathematics.4.0.1\lib\net45\SharpDX.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.MediaFoundation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>packages\SharpDX.MediaFoundation.4.0.1\lib\net45\SharpDX.MediaFoundation.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.XAudio2, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>packages\SharpDX.XAudio2.4.0.1\lib\net45\SharpDX.XAudio2.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.XInput, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <HintPath>packages\SharpDX.XInput.4.0.1\lib\net45\SharpDX.XInput.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="MathsExtensions.cs" />
-    <Compile Include="Vector2Extensions.cs" />
-    <Compile Include="BrawlerEventArgs.cs" />
-    <Compile Include="Layer.cs" />
-    <Compile Include="LevelManager`1.cs" />
-    <Compile Include="Tent.cs" />
-    <Compile Include="BuyerPopout.cs" />
-    <Compile Include="Buyer.cs" />
-    <Compile Include="Bases.cs" />
-    <Compile Include="BasesProperties.cs" />
-    <Compile Include="BaseSpriteSequence.cs" />
-    <Compile Include="Fortress.cs" />
-    <Compile Include="Path.cs" />
-    <Compile Include="ShootEventArgs.cs" />
-    <Compile Include="FindEnemy.cs" />
-    <Compile Include="TowerBase.cs" />
-    <Compile Include="TowerManager.cs" />
-    <Compile Include="FormatUtils.cs" />
-    <Compile Include="GameObject.cs" />
-    <Compile Include="GameObjectProperties.cs" />
-    <Compile Include="ContentGameObject.cs" />
-    <Compile Include="DrawableGameObject.cs" />
-    <Compile Include="GameObjectCollection.cs" />
-    <Compile Include="Level.cs" />
-    <Compile Include="GameStates.cs" />
-    <Compile Include="Position.cs" />
-    <Compile Include="BrawlerGame.cs" />
-    <Compile Include="Levels.cs" />
-    <Compile Include="ProjectileInfo.cs" />
-    <Compile Include="DamageType.cs" />
-    <Compile Include="Projectile.cs" />
-    <Compile Include="Spawner.cs" />
-    <Compile Include="EnemySpawner.cs" />
-    <Compile Include="SupportSpawner.cs" />
-    <Compile Include="Tower.cs" />
-    <Compile Include="TowerProperties.cs" />
-    <Compile Include="Directions.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="Physics\Point.cs" />
-    <Compile Include="Physics\PointMass.cs" />
-    <Compile Include="PathFinding\Node.cs" />
-    <Compile Include="PathFinding\Navigator.cs" />
-    <Compile Include="Graphics\ScreenResizeEventArgs.cs" />
-    <Compile Include="Graphics\GraphicsManager.cs" />
-    <Compile Include="Graphics\Sequence.cs" />
-    <Compile Include="Graphics\SequenceManager`1.cs" />
-    <Compile Include="Graphics\EndFunction.cs" />
-    <Compile Include="Graphics\Sprite.cs" />
-    <Compile Include="Graphics\Text.cs" />
-    <Compile Include="Graphics\ViewCamera.cs" />
-    <Compile Include="UI\PercentageBar.cs" />
-    <Compile Include="UI\ScrollBar.cs" />
-    <Compile Include="UI\UniqueDraggable.cs" />
-    <Compile Include="UI\MoveEventArgs.cs" />
-    <Compile Include="UI\Draggable.cs" />
-    <Compile Include="UI\DraggableProperties.cs" />
-    <Compile Include="UI\Button.cs" />
-    <Compile Include="UI\AlignEventArgs.cs" />
-    <Compile Include="UI\Element.cs" />
-    <Compile Include="UI\Align.cs" />
-    <Compile Include="UI\Panel.cs" />
-    <Compile Include="UI\ValueEventArgs.cs" />
-    <Compile Include="UI\Slider.cs" />
-    <Compile Include="Settings\SettingsMenu.cs" />
-    <Compile Include="Particles\Emitter.cs" />
-    <Compile Include="Particles\ParticleDefinition.cs" />
-    <Compile Include="Particles\Particle.cs" />
-    <Compile Include="Menu\BackgroundLayer.cs" />
-    <Compile Include="Menu\InstructionsLayer.cs" />
-    <Compile Include="Menu\SettingsLayer.cs" />
-    <Compile Include="Menu\ProfileLayer.cs" />
-    <Compile Include="Menu\MenuLayer.cs" />
-    <Compile Include="Menu\LevelMenu.cs" />
-    <Compile Include="Menu\SplashLayer.cs" />
-    <Compile Include="Mechanics\Bubble.cs" />
-    <Compile Include="Mechanics\Phases.cs" />
-    <Compile Include="Mechanics\Wave.cs" />
-    <Compile Include="Mechanics\Towers\ChainPoint.cs" />
-    <Compile Include="Mechanics\Towers\Exploder.cs" />
-    <Compile Include="Mechanics\Towers\Officer.cs" />
-    <Compile Include="Mechanics\Towers\Freezer.cs" />
-    <Compile Include="Mechanics\Towers\Ballista.cs" />
-    <Compile Include="Mechanics\Towers\Chainer.cs" />
-    <Compile Include="Mechanics\Towers\Homer.cs" />
-    <Compile Include="Mechanics\Towers\Soldier.cs" />
-    <Compile Include="Mechanics\Projectiles\Chain.cs" />
-    <Compile Include="Mechanics\Projectiles\Boomerang.cs" />
-    <Compile Include="Mechanics\Projectiles\Explosion.cs" />
-    <Compile Include="Mechanics\Projectiles\Homing.cs" />
-    <Compile Include="Mechanics\Projectiles\Explosive.cs" />
-    <Compile Include="Mechanics\Enemies\Bison.cs" />
-    <Compile Include="Mechanics\Enemies\Lion.cs" />
-    <Compile Include="Mechanics\Enemies\Elephant.cs" />
-    <Compile Include="Mechanics\Enemies\Rhino.cs" />
-    <Compile Include="Mechanics\Enemies\Snake.cs" />
-    <Compile Include="Mechanics\Enemies\Goat.cs" />
-    <Compile Include="Mechanics\Enemies\Yak.cs" />
-    <Compile Include="Mechanics\Bosses\Boss.cs" />
-    <Compile Include="Mechanics\Bosses\Cyclops.cs" />
-    <Compile Include="Mechanics\Bosses\Aeternae.cs" />
-    <Compile Include="Mechanics\Bosses\Griffin.cs" />
-    <Compile Include="Mechanics\Bosses\Minotaur.cs" />
-    <Compile Include="Mechanics\Bosses\Hydra.cs" />
-    <Compile Include="Mechanics\Bosses\Faun.cs" />
-    <Compile Include="Mechanics\Bosses\Bull.cs" />
-    <Compile Include="Input\MobileInput.cs" />
-    <Compile Include="Input\KeyFunction.cs" />
-    <Compile Include="Input\MouseFunction.cs" />
-    <Compile Include="Input\KeyEventArgs.cs" />
-    <Compile Include="Input\MouseEventArgs.cs" />
-    <Compile Include="Input\InputEvents.cs" />
-    <Compile Include="Input\InputType.cs" />
-    <Compile Include="Input\KeyboardInput.cs" />
-    <Compile Include="Input\MouseInput.cs" />
-    <Compile Include="Input\MouseButtons.cs" />
-    <Compile Include="GameInfo\EndLayer.cs" />
-    <Compile Include="GameInfo\EndLevel.cs" />
-    <Compile Include="GameInfo\OverlayLayer.cs" />
-    <Compile Include="GameInfo\UILayer.cs" />
-    <Compile Include="GameInfo\GameLayer.cs" />
-    <Compile Include="GameInfo\GameProperties.cs" />
-    <Compile Include="GameInfo\GameLevel.cs" />
-    <Compile Include="Framework\Timer.cs" />
-    <Compile Include="Framework\LevelEditor\DraggableDeletable.cs" />
-    <Compile Include="Framework\LevelEditor\DraggableDeletableProperties.cs" />
-    <Compile Include="Framework\LevelEditor\Grid.cs" />
-    <Compile Include="Framework\LevelEditor\Tile.cs" />
-    <Compile Include="Framework\LevelEditor\GridProperties.cs" />
-    <Compile Include="Framework\LevelEditor\LevelEditor.cs" />
-    <Compile Include="Framework\LevelEditor\UILayer.cs" />
-    <Compile Include="Framework\LevelEditor\GridLayer.cs" />
-    <Compile Include="Framework\LevelEditor\MultiGrid.cs" />
-    <Compile Include="Framework\LevelEditor\MultiGridProperties.cs" />
-    <Compile Include="Framework\LevelEditor\TileSelector.cs" />
-    <Compile Include="Framework\LevelEditor\PrefabAttribute.cs" />
-    <Compile Include="Framework\LevelEditor\TileInfo.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Audio\AudibleGameObject.cs" />
+    <Compile Include="Audio\Channel.cs" />
+    <Compile Include="Audio\MediaSong.cs" />
+    <Compile Include="Audio\Slider.cs" />
+    <Compile Include="Audio\Sound.cs" />
+    <Compile Include="Audio\VolumeChangedEventArgs.cs" />
+    <Compile Include="Collections\QuadTree`1.cs" />
     <Compile Include="Collision\ClickableCollider.cs" />
-    <Compile Include="Collision\CollisionFunc.cs" />
-    <Compile Include="Collision\CollisionEventArgs.cs" />
     <Compile Include="Collision\Collider.cs" />
-    <Compile Include="Collision\CollisionMap.cs" />
+    <Compile Include="Collision\CollisionEventArgs.cs" />
+    <Compile Include="Collision\CollisionFunc.cs" />
     <Compile Include="Collision\CollisionLayer.cs" />
+    <Compile Include="Collision\CollisionMap.cs" />
+    <Compile Include="Collision\CursorCollider.cs" />
+    <Compile Include="Collision\Intersections\Circular.cs" />
+    <Compile Include="Collision\Intersections\IIntersectionable.cs" />
+    <Compile Include="Collision\Intersections\Intersection.cs" />
+    <Compile Include="Collision\Intersections\Point.cs" />
+    <Compile Include="Collision\Intersections\Rectangular.cs" />
     <Compile Include="Collision\LayerType.cs" />
     <Compile Include="Collision\TouchState.cs" />
     <Compile Include="Collision\TouchType.cs" />
-    <Compile Include="Collision\CursorCollider.cs" />
-    <Compile Include="Collision\Intersections\Circular.cs" />
-    <Compile Include="Collision\Intersections\Intersection.cs" />
-    <Compile Include="Collision\Intersections\IIntersectionable.cs" />
-    <Compile Include="Collision\Intersections\Point.cs" />
-    <Compile Include="Collision\Intersections\Rectangular.cs" />
-    <Compile Include="Collections\QuadTree`1.cs" />
-    <Compile Include="Audio\VolumeChangedEventArgs.cs" />
-    <Compile Include="Audio\Channel.cs" />
-    <Compile Include="Audio\Slider.cs" />
-    <Compile Include="Audio\AudibleGameObject.cs" />
-    <Compile Include="Audio\Sound.cs" />
-    <Compile Include="Audio\MediaSong.cs" />
-    <Compile Include="BrawlerSourceWindows\Program.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Framework\LevelEditor\DraggableDeletable.cs" />
+    <Compile Include="Framework\LevelEditor\DraggableDeletableProperties.cs" />
+    <Compile Include="Framework\LevelEditor\Grid.cs" />
+    <Compile Include="Framework\LevelEditor\GridLayer.cs" />
+    <Compile Include="Framework\LevelEditor\GridProperties.cs" />
+    <Compile Include="Framework\LevelEditor\LevelEditor.cs" />
+    <Compile Include="Framework\LevelEditor\MultiGrid.cs" />
+    <Compile Include="Framework\LevelEditor\MultiGridProperties.cs" />
+    <Compile Include="Framework\LevelEditor\PrefabAttribute.cs" />
+    <Compile Include="Framework\LevelEditor\Tile.cs" />
+    <Compile Include="Framework\LevelEditor\TileInfo.cs" />
+    <Compile Include="Framework\LevelEditor\TileSelector.cs" />
+    <Compile Include="Framework\LevelEditor\UILayer.cs" />
+    <Compile Include="Framework\Timer.cs" />
+    <Compile Include="GameInfo\EndLayer.cs" />
+    <Compile Include="GameInfo\EndLevel.cs" />
+    <Compile Include="GameInfo\GameLayer.cs" />
+    <Compile Include="GameInfo\GameLevel.cs" />
+    <Compile Include="GameInfo\GameProperties.cs" />
+    <Compile Include="GameInfo\OverlayLayer.cs" />
+    <Compile Include="GameInfo\UILayer.cs" />
+    <Compile Include="GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graphics\EndFunction.cs" />
+    <Compile Include="Graphics\GraphicsManager.cs" />
+    <Compile Include="Graphics\ScreenResizeEventArgs.cs" />
+    <Compile Include="Graphics\Sequence.cs" />
+    <Compile Include="Graphics\SequenceManager`1.cs" />
+    <Compile Include="Graphics\Sprite.cs" />
+    <Compile Include="Graphics\Text.cs" />
+    <Compile Include="Graphics\ViewCamera.cs" />
+    <Compile Include="Input\InputEvents.cs" />
+    <Compile Include="Input\InputType.cs" />
+    <Compile Include="Input\KeyboardInput.cs" />
+    <Compile Include="Input\KeyEventArgs.cs" />
+    <Compile Include="Input\KeyFunction.cs" />
+    <Compile Include="Input\MobileInput.cs" />
+    <Compile Include="Input\MouseButtons.cs" />
+    <Compile Include="Input\MouseEventArgs.cs" />
+    <Compile Include="Input\MouseFunction.cs" />
+    <Compile Include="Input\MouseInput.cs" />
+    <Compile Include="Main\Bases.cs" />
+    <Compile Include="Main\BaseSpriteSequence.cs" />
+    <Compile Include="Main\BasesProperties.cs" />
+    <Compile Include="Main\BrawlerEventArgs.cs" />
+    <Compile Include="Main\Game1.cs" />
+    <Compile Include="Main\Buyer.cs" />
+    <Compile Include="Main\BuyerPopout.cs" />
+    <Compile Include="Main\ContentGameObject.cs" />
+    <Compile Include="Main\DamageType.cs" />
+    <Compile Include="Main\Directions.cs" />
+    <Compile Include="Main\DrawableGameObject.cs" />
+    <Compile Include="Main\Enemy.cs" />
+    <Compile Include="Main\EnemySpawner.cs" />
+    <Compile Include="Main\FindEnemy.cs" />
+    <Compile Include="Main\FormatUtils.cs" />
+    <Compile Include="Main\Fortress.cs" />
+    <Compile Include="Main\GameObject.cs" />
+    <Compile Include="Main\GameObjectCollection.cs" />
+    <Compile Include="Main\GameObjectProperties.cs" />
+    <Compile Include="Main\GameStates.cs" />
+    <Compile Include="Main\Layer.cs" />
+    <Compile Include="Main\Level.cs" />
+    <Compile Include="Main\LevelManager`1.cs" />
+    <Compile Include="Main\Levels.cs" />
+    <Compile Include="Main\MathsExtensions.cs" />
+    <Compile Include="Main\Path.cs" />
+    <Compile Include="Main\Position.cs" />
+    <Compile Include="Main\Projectile.cs" />
+    <Compile Include="Main\ProjectileInfo.cs" />
+    <Compile Include="Main\ShootEventArgs.cs" />
+    <Compile Include="Main\Spawner.cs" />
+    <Compile Include="Main\SupportSpawner.cs" />
+    <Compile Include="Main\Tent.cs" />
+    <Compile Include="Main\Tower.cs" />
+    <Compile Include="Main\TowerBase.cs" />
+    <Compile Include="Main\TowerManager.cs" />
+    <Compile Include="Main\TowerProperties.cs" />
+    <Compile Include="Main\Vector2Extensions.cs" />
+    <Compile Include="Mechanics\Bosses\Aeternae.cs" />
+    <Compile Include="Mechanics\Bosses\Boss.cs" />
+    <Compile Include="Mechanics\Bosses\Bull.cs" />
+    <Compile Include="Mechanics\Bosses\Cyclops.cs" />
+    <Compile Include="Mechanics\Bosses\Faun.cs" />
+    <Compile Include="Mechanics\Bosses\Griffin.cs" />
+    <Compile Include="Mechanics\Bosses\Hydra.cs" />
+    <Compile Include="Mechanics\Bosses\Minotaur.cs" />
+    <Compile Include="Mechanics\Bubble.cs" />
+    <Compile Include="Mechanics\Enemies\Bison.cs" />
+    <Compile Include="Mechanics\Enemies\Elephant.cs" />
+    <Compile Include="Mechanics\Enemies\Goat.cs" />
+    <Compile Include="Mechanics\Enemies\Lion.cs" />
+    <Compile Include="Mechanics\Enemies\Rhino.cs" />
+    <Compile Include="Mechanics\Enemies\Snake.cs" />
+    <Compile Include="Mechanics\Enemies\Yak.cs" />
+    <Compile Include="Mechanics\Phases.cs" />
+    <Compile Include="Mechanics\Projectiles\Boomerang.cs" />
+    <Compile Include="Mechanics\Projectiles\Chain.cs" />
+    <Compile Include="Mechanics\Projectiles\Explosion.cs" />
+    <Compile Include="Mechanics\Projectiles\Explosive.cs" />
+    <Compile Include="Mechanics\Projectiles\Homing.cs" />
+    <Compile Include="Mechanics\Towers\Ballista.cs" />
+    <Compile Include="Mechanics\Towers\Chainer.cs" />
+    <Compile Include="Mechanics\Towers\ChainPoint.cs" />
+    <Compile Include="Mechanics\Towers\Exploder.cs" />
+    <Compile Include="Mechanics\Towers\Freezer.cs" />
+    <Compile Include="Mechanics\Towers\Homer.cs" />
+    <Compile Include="Mechanics\Towers\Officer.cs" />
+    <Compile Include="Mechanics\Towers\Soldier.cs" />
+    <Compile Include="Mechanics\Wave.cs" />
+    <Compile Include="Menu\BackgroundLayer.cs" />
+    <Compile Include="Menu\InstructionsLayer.cs" />
+    <Compile Include="Menu\LevelMenu.cs" />
+    <Compile Include="Menu\MenuLayer.cs" />
+    <Compile Include="Menu\ProfileLayer.cs" />
+    <Compile Include="Menu\SettingsLayer.cs" />
+    <Compile Include="Menu\SplashLayer.cs" />
+    <Compile Include="Particles\Emitter.cs" />
+    <Compile Include="Particles\Particle.cs" />
+    <Compile Include="Particles\ParticleDefinition.cs" />
+    <Compile Include="PathFinding\Navigator.cs" />
+    <Compile Include="PathFinding\Node.cs" />
+    <Compile Include="Physics\Point.cs" />
+    <Compile Include="Physics\PointMass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\SettingsMenu.cs" />
+    <Compile Include="Strings\Strings.Designer.cs" />
+    <Compile Include="UI\Align.cs" />
+    <Compile Include="UI\AlignEventArgs.cs" />
+    <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\Draggable.cs" />
+    <Compile Include="UI\DraggableProperties.cs" />
+    <Compile Include="UI\Element.cs" />
+    <Compile Include="UI\MoveEventArgs.cs" />
+    <Compile Include="UI\Panel.cs" />
+    <Compile Include="UI\PercentageBar.cs" />
+    <Compile Include="UI\ScrollBar.cs" />
+    <Compile Include="UI\Slider.cs" />
+    <Compile Include="UI\UniqueDraggable.cs" />
+    <Compile Include="UI\ValueEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <PRIResource Include="Strings\Strings.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\LargeTile.scale-100.png" />
+    <Content Include="Assets\LargeTile.scale-125.png" />
+    <Content Include="Assets\LargeTile.scale-150.png" />
+    <Content Include="Assets\LargeTile.scale-200.png" />
+    <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\LockScreenLogo.scale-100.png" />
+    <Content Include="Assets\LockScreenLogo.scale-125.png" />
+    <Content Include="Assets\LockScreenLogo.scale-150.png" />
+    <Content Include="Assets\LockScreenLogo.scale-400.png" />
+    <Content Include="Assets\SmallLogo.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-100.png" />
+    <Content Include="Assets\SmallTile.scale-125.png" />
+    <Content Include="Assets\SmallTile.scale-150.png" />
+    <Content Include="Assets\SmallTile.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\WideTile.scale-100.png" />
+    <Content Include="Assets\WideTile.scale-125.png" />
+    <Content Include="Assets\WideTile.scale-150.png" />
+    <Content Include="Assets\WideTile.scale-200.png" />
+    <Content Include="Assets\WideTile.scale-400.png" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="GamePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Content\Ballista.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -621,14 +729,33 @@
     <Content Include="Content\Target.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="packages.config" />
+    <None Include="ProjectTorrim_TemporaryKey.pfx" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets" Condition="Exists('packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\MonoGame.Framework.WindowsDX.3.7.1.189\build\MonoGame.Framework.WindowsDX.targets'))" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="MonoGame.Framework.WindowsUniversal">
+      <Version>3.7.1.189</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.Loader">
+      <Version>4.0.0-beta-22231</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!--Import Project="$(MSBuildExtensionsPath)\MonoGame\v4.0\MonoGame.Content.Builder.targets" /-->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
   </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

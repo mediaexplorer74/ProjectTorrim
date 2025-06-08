@@ -24,7 +24,7 @@ namespace BrawlerSource
     public ViewCamera ViewCamera;
     public CursorCollider Cursor;
     public Level Level;
-    public BrawlerGame Game;
+    public Game1 Game;
     public int Index;
     public TimeSpan TotalTime;
     public bool IsNew;

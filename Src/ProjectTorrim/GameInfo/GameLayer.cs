@@ -10,13 +10,14 @@ using BrawlerSource.Mechanics;
 using BrawlerSource.Mechanics.Bosses;
 using BrawlerSource.Mechanics.Enemies;
 using Microsoft.Xna.Framework.Input;
+//using System.Text.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-//using System.Text.Json;
-using Newtonsoft.Json;
+using Windows.Storage;
 
 #nullable disable
 namespace BrawlerSource.GameInfo
@@ -58,7 +59,11 @@ namespace BrawlerSource.GameInfo
         public void SaveGame()
         {
             string contents = JsonConvert.SerializeObject(this.GetProperties(), Formatting.Indented);
-            File.WriteAllText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "gamesave_" + this.myProfile + ".json"), contents);
+            StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
+
+            File.WriteAllText(
+                System.IO.Path.Combine(appdataFolder.Path, "gamesave_" + this.myProfile + ".json"), 
+                contents);
         }
 
     public GameProperties GetProperties()
@@ -83,13 +88,14 @@ namespace BrawlerSource.GameInfo
       return properties;
     }
 
-        public void LoadGame()
-        {
-            string path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "gamesave_" + this.myProfile + ".json");
-            if (!File.Exists(path))
-                return;
-            this.SetProperties(JsonConvert.DeserializeObject<GameProperties>(File.ReadAllText(path)));
-        }
+    public void LoadGame()
+    {
+        StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
+        string path = System.IO.Path.Combine(appdataFolder.Path, "gamesave_" + this.myProfile + ".json");
+        if (!File.Exists(path))
+            return;
+        this.SetProperties(JsonConvert.DeserializeObject<GameProperties>(File.ReadAllText(path)));
+    }
 
     public void SetProperties(GameProperties properties)
     {

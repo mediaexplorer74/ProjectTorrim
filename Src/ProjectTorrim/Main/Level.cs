@@ -13,7 +13,7 @@ namespace BrawlerSource
 {
   public class Level
   {
-    public BrawlerGame Game;
+    public Game1 Game;
     private GameStates myState;
     private GameStates myNextState;
     public double totalTime;
@@ -42,7 +42,7 @@ namespace BrawlerSource
 
     public Layer UILayer { get; protected set; }
 
-    public Level(BrawlerGame game)
+    public Level(Game1 game)
     {
       this.Game = game;
       this.totalTime = 0.0;

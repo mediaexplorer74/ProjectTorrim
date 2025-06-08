@@ -59,7 +59,8 @@ namespace BrawlerSource
       this.Construct(position, health, speed, path);
     }
 
-    protected virtual void Construct(Position position, int health, int speed, Queue<BrawlerSource.PathFinding.Node> path)
+    protected virtual void Construct(Position position, int health, int speed, 
+        Queue<BrawlerSource.PathFinding.Node> path)
     {
       this.Position = position;
       this.Health = health;

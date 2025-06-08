@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Windows.Storage;
 
 #nullable disable
 namespace BrawlerSource.Menu
@@ -23,7 +24,8 @@ namespace BrawlerSource.Menu
     private Sprite myOverrideBackground;
     private Button myOverrideConfirm;
     private Button myOverrideCancel;
-    private string myGameSave = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "gamesave_{0}.json");
+    static StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
+    private string myGameSave = System.IO.Path.Combine(appdataFolder.Path, "gamesave_{0}.json");
     private Dictionary<string, Button> myProfileButtons;
     private bool myIsNewMode;
 
@@ -34,7 +36,8 @@ namespace BrawlerSource.Menu
       {
         this.myIsNewMode = value;
         foreach (string key in this.myProfileButtons.Keys)
-          this.myProfileButtons[key].IsDisabled = !this.myIsNewMode && !File.Exists(string.Format(this.myGameSave, (object) key));
+          this.myProfileButtons[key].IsDisabled = !this.myIsNewMode 
+                        && !File.Exists(string.Format(this.myGameSave, (object) key));
       }
     }
 
