@@ -32,8 +32,8 @@ namespace BrawlerSource.UI
     private TimeSpan StartDragging;
     public TimeSpan? DragTime;
     public bool WasDragging;
-    public bool IsDragging;
-    public Position MouseOffset;
+    public bool IsDragging; 
+    public Position MOffset;
     protected HashSet<GameObject> InvalidCollisions;
     protected HashSet<GameObject> PreviousInvalidCollisions;
     public bool IsDisabled;
@@ -103,7 +103,10 @@ namespace BrawlerSource.UI
       this.IsDisabled = false;
       this.WasDragging = false;
       this.IsDragging = false;
-      this.MouseOffset = new Position();
+
+      //"Mouse offset"
+      this.MOffset = new Position();
+
       this.InvalidCollisions = new HashSet<GameObject>();
       this.PreviousInvalidCollisions = new HashSet<GameObject>();
       this.SnapSize = 1;
@@ -115,11 +118,26 @@ namespace BrawlerSource.UI
       clickableCollider.Position = this.Position;
       this.myCollider = clickableCollider;
       this.myCollider.AddIntersection((IIntersectionable) this.myRectangle);
+
       this.myInput = new InputEvents((GameObject) this);
+      
+      // mouse handling
       this.myCollider.AddMouseInput(MouseButtons.Left, InputType.Pressed, new MouseFunction(this.OnPressed));
       this.myInput.AddMouseButton(MouseButtons.Left, InputType.Released, new MouseFunction(this.OnReleased));
+      
+      // touch-screen handling
+      this.myCollider.AddTouchInput(/*1*/0, InputType.Pressed, new TouchFunction(this.OnPressed));
+      this.myInput.AddTouch(/*1*/0, InputType.Released, new TouchFunction(this.OnReleased));
+
+      //TEST
+      //this.myCollider.AddTouchInput(1, InputType.Pressed, new TouchFunction(this.OnPressed));
+      //this.myInput.AddTouch(1, InputType.Released, new TouchFunction(this.OnReleased));
+      //this.myCollider.AddTouchInput(/*1*/0, InputType.Held, new TouchFunction(this.OnPressed));
+      //this.myInput.AddTouch(/*1*/0, InputType.Held, new TouchFunction(this.OnReleased));
+
       if (sequence == null)
         return;
+      
       Sprite sprite = new Sprite((GameObject) this);
       sprite.Sequence = sequence;
       sprite.Position = this.Position;
@@ -137,7 +155,9 @@ namespace BrawlerSource.UI
         this.mySprite.Scale = new Vector2(1f);
       }
       else
-        this.mySprite.Scale = (new Position(this.myRectangle.Width, this.myRectangle.Height) / new Position((float) this.mySprite.Sequence.Width, (float) this.mySprite.Sequence.Height)).ToVector2();
+        this.mySprite.Scale = (new Position(this.myRectangle.Width, 
+            this.myRectangle.Height) / new Position((float) this.mySprite.Sequence.Width, 
+            (float) this.mySprite.Sequence.Height)).ToVector2();
     }
 
     public void SetDisabled(bool isDisabled)
@@ -168,20 +188,42 @@ namespace BrawlerSource.UI
       this.OnPressed((BrawlerEventArgs) e, e.Position);
     }
 
+    public void OnPressed(object sender, TouchEventArgs e)
+    {
+      this.OnPressed((BrawlerEventArgs) e, e.Position);
+    }
+
     public void OnPressed(BrawlerEventArgs e, Position pos)
     {
       this.SetIsDragging(e.GameTime, true);
       if (!this.IsDragging || !this.IsResizeable)
         return;
-      this.mySideScale = new Position((double) pos.X < (double) this.myRectangle.Left || (double) pos.X > (double) this.myRectangle.Left + (double) this.EdgeSize ? ((double) pos.X > (double) this.myRectangle.Right || (double) pos.X < (double) this.myRectangle.Right - (double) this.EdgeSize ? 0.0f : 1f) : -1f, (double) pos.Y < (double) this.myRectangle.Top || (double) pos.Y > (double) this.myRectangle.Top + (double) this.EdgeSize ? ((double) pos.Y > (double) this.myRectangle.Bottom || (double) pos.Y < (double) this.myRectangle.Bottom - (double) this.EdgeSize ? 0.0f : 1f) : -1f);
+      this.mySideScale = new Position((double) pos.X < (double) this.myRectangle.Left
+          || (double) pos.X > (double) this.myRectangle.Left + (double) this.EdgeSize
+          ? ((double) pos.X > (double) this.myRectangle.Right 
+          || (double) pos.X < (double) this.myRectangle.Right - 
+          (double) this.EdgeSize ? 0.0f : 1f) : -1f, 
+          (double) pos.Y < (double) this.myRectangle.Top 
+          || (double) pos.Y > (double) this.myRectangle.Top 
+          + (double) this.EdgeSize ? ((double) pos.Y > (double) this.myRectangle.Bottom 
+          || (double) pos.Y < (double) this.myRectangle.Bottom - (double) this.EdgeSize 
+          ? 0.0f : 1f) 
+          : -1f);
+
       if (!(this.mySideScale != new Position(0.0f)))
         return;
-      this.myAnchorPosition = new Position((double) this.mySideScale.X == 0.0 ? this.Position.X : ((double) this.mySideScale.X == -1.0 ? this.myRectangle.Right : this.myRectangle.Left), (double) this.mySideScale.Y == 0.0 ? this.Position.Y : ((double) this.mySideScale.Y == -1.0 ? this.myRectangle.Bottom : this.myRectangle.Top));
+      this.myAnchorPosition = new Position((double) this.mySideScale.X == 0.0
+          ? this.Position.X 
+          : ((double) this.mySideScale.X == -1.0 ? this.myRectangle.Right : this.myRectangle.Left), 
+          (double) this.mySideScale.Y == 0.0 ? this.Position.Y 
+          : ((double) this.mySideScale.Y == -1.0 
+            ? this.myRectangle.Bottom : this.myRectangle.Top));
     }
 
     public void SetIsDragging(GameTime gameTime, bool isDragging)
     {
-      this.IsDragging = isDragging && (this.Layer.ActiveDragger == null || this.Layer.ActiveDragger == this);
+      this.IsDragging = isDragging && (this.Layer.ActiveDragger == null 
+                || this.Layer.ActiveDragger == this);
       if (this.IsDragging)
       {
         this.Layer.ActiveDragger = (GameObject) this;
@@ -194,7 +236,8 @@ namespace BrawlerSource.UI
 
     public override void FirstUpdate(GameTime gameTime)
     {
-      this.Position = this.Position.Floor((double) this.SnapSize) + this.myRectangle.Dimensions / 2f % (float) this.SnapSize;
+      this.Position = this.Position.Floor((double) this.SnapSize) 
+                + this.myRectangle.Dimensions / 2f % (float) this.SnapSize;
       this.myCollider.Position = this.Position;
       if (this.mySprite != null)
         this.mySprite.Position = this.Position;
@@ -206,8 +249,10 @@ namespace BrawlerSource.UI
       this.PreviousInvalidCollisions = this.InvalidCollisions;
       this.InvalidCollisions = new HashSet<GameObject>();
       this.ValidateDrag();
+
       if (this.IsDragging)
         this.Drag();
+
       this.myCollider.Position = this.Position;
       if (this.mySprite != null)
         this.mySprite.Position = this.Position;
@@ -219,13 +264,19 @@ namespace BrawlerSource.UI
 
     private void ValidateDrag()
     {
-      this.IsDragging = ((this.IsDragging ? 1 : 0) | (this.IsValidPosition() ? 0 : (this.Layer.ActiveDragger == this ? 1 : 0))) != 0;
+      this.IsDragging = ((this.IsDragging ? 1 : 0) 
+                | (this.IsValidPosition() ? 0 
+                : (this.Layer.ActiveDragger == this ? 1 : 0))) != 0;
+
       if (!this.WasDragging && this.IsDragging)
-        this.MouseOffset = this.Position - this.Layer.Cursor.Position;
+        this.MOffset = this.Position - this.Layer.Cursor.Position;
+
       else if (this.WasDragging && !this.IsDragging && this.Layer.ActiveDragger == this)
         this.Layer.ActiveDragger = (GameObject) null;
+
       if (!this.IsDragging)
         return;
+      
       this.DragTime = new TimeSpan?();
     }
 
@@ -236,7 +287,8 @@ namespace BrawlerSource.UI
         Position position1 = this.Layer.Cursor.Position - this.myAnchorPosition;
         position1.X = (double) this.mySideScale.X == 0.0 ? this.myRectangle.Width : position1.X;
         position1.Y = (double) this.mySideScale.Y == 0.0 ? this.myRectangle.Height : position1.Y;
-        Position position2 = (position1.Abs() / (float) this.SnapSize).Round(0, 1.0).Clamp(new Position(1f), new Position(float.MaxValue));
+        Position position2 = (position1.Abs() / (float) this.SnapSize)
+                    .Round(0, 1.0).Clamp(new Position(1f), new Position(float.MaxValue));
         if (this.IsRepeating)
         {
           this.mySprite.Sequence.Width = (int) ((double) position2.X * (double) this.SnapSize);
@@ -251,7 +303,9 @@ namespace BrawlerSource.UI
         this.myCollider.Position = this.Position;
       }
       else
-        this.Position = (this.Layer.Cursor.Position + this.MouseOffset).Floor((double) this.SnapSize) + this.myRectangle.Dimensions / 2f % (float) this.SnapSize;
+        this.Position = (this.Layer.Cursor.Position + this.MOffset).Floor((double) this.SnapSize)
+                    + this.myRectangle.Dimensions / 2f % (float) this.SnapSize;
+
       if (this.MinPosition != (Position) null && this.MaxPosition != (Position) null)
         this.Position = this.Position.Clamp(this.MinPosition, this.MaxPosition);
       EventHandler onMove = this.OnMove;

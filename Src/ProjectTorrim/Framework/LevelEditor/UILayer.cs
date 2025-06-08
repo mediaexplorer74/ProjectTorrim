@@ -8,111 +8,142 @@ using BrawlerSource.Input;
 using BrawlerSource.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using System.IO;
 //using System.Text.Json;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
 
 #nullable disable
 namespace BrawlerSource.Framework.LevelEditor
 {
-  public class UILayer(Level level, int index) : Layer(level, index)
-  {
-    public GridLayer gl;
-    private BrawlerSource.Graphics.Text gridLayerText;
-    private BrawlerSource.Graphics.Text gridScaleText;
-    private Button btnMode;
-
-    public override void Initilize()
+    public class UILayer(Level level, int index) : Layer(level, index)
     {
-      base.Initilize();
-      new Panel((Layer) this, new Vector2(200f, 10f), Align.Top, new Position(0.0f)).AddToDraw();
-      Button button1 = new Button((Layer) this, Align.Top | Align.Left, new Position(0.0f, 0.0f), new Position(48f, 32f), new MouseFunction(this.gl.Grids.New));
-      button1.SetText("New");
-      button1.AddToDraw();
-      Button button2 = new Button((Layer) this, Align.Top | Align.Left, new Position(48f, 0.0f), new Position(48f, 32f), new MouseFunction(this.gl.Grids.Save));
-      button2.SetText("Save");
-      button2.AddToDraw();
-      Button button3 = new Button((Layer) this, Align.Top | Align.Left, new Position(96f, 0.0f), new Position(48f, 32f), new MouseFunction(this.gl.Grids.Load));
-      button3.SetText("Load");
-      button3.AddToDraw();
-      this.btnMode = new Button((Layer) this, Align.Top, new Position(-160f, 0.0f), new Position(96f, 32f), new MouseFunction(this.ToggleMode));
-      this.btnMode.SetText("Object Mode");
-      this.btnMode.AddToDraw();
-      BrawlerSource.Graphics.Text text1 = new BrawlerSource.Graphics.Text((Layer) this);
-      text1.FontPath = "Font";
-      text1.Colour = Color.Black;
-      text1.Depth = 1f;
-      text1.Scale = new Vector2(1f);
-      text1.Position = new Position(304f, -250f);
-      text1.String = "Layer";
-      BrawlerSource.Graphics.Text text2 = text1;
-      this.GameObjects.Add((GameObject) text2);
-      text2.AddToDraw();
-      Button button4 = new Button((Layer) this, Align.Top | Align.Right, new Position(0.0f, 0.0f), new Position(32f), new MouseFunction(this.gl.Grids.IncreaseGridLayer));
-      button4.SetColour(Color.OldLace);
-      button4.SetText("+");
-      button4.AddToDraw();
-      BrawlerSource.Graphics.Text text3 = new BrawlerSource.Graphics.Text((Layer) this);
-      text3.FontPath = "Font";
-      text3.Colour = Color.Black;
-      text3.Depth = 1f;
-      text3.Scale = new Vector2(1f);
-      text3.Position = new Position(416f, -250f);
-      this.gridLayerText = text3;
-      this.GameObjects.Add((GameObject) this.gridLayerText);
-      this.gridLayerText.AddToDraw();
-      Button button5 = new Button((Layer) this, Align.Top | Align.Right, new Position(-96f, 0.0f), new Position(32f), new MouseFunction(this.gl.Grids.DecreaseGridLayer));
-      button5.SetColour(Color.OldLace);
-      button5.SetText("-");
-      button5.AddToDraw();
-      BrawlerSource.Graphics.Text text4 = new BrawlerSource.Graphics.Text((Layer) this);
-      text4.FontPath = "Font";
-      text4.Colour = Color.Black;
-      text4.Depth = 1f;
-      text4.Scale = new Vector2(1f);
-      text4.Position = new Position(-32f, -250f);
-      text4.String = "Size";
-      BrawlerSource.Graphics.Text text5 = text4;
-      this.GameObjects.Add((GameObject) text5);
-      text5.AddToDraw();
-      Button button6 = new Button((Layer) this, Align.Top | Align.Right, new Position(-336f, 0.0f), new Position(32f), new MouseFunction(this.gl.Grids.IncreaseGridScale));
-      button6.SetColour(Color.OldLace);
-      button6.SetText("+");
-      button6.AddToDraw();
-      BrawlerSource.Graphics.Text text6 = new BrawlerSource.Graphics.Text((Layer) this);
-      text6.FontPath = "Font";
-      text6.Colour = Color.Black;
-      text6.Depth = 1f;
-      text6.Scale = new Vector2(1f);
-      text6.Position = new Position(80f, -250f);
-      this.gridScaleText = text6;
-      this.GameObjects.Add((GameObject) this.gridScaleText);
-      this.gridScaleText.AddToDraw();
-      Button button7 = new Button((Layer) this, Align.Top | Align.Right, new Position(-432f, 0.0f), new Position(32f), new MouseFunction(this.gl.Grids.DecreaseGridScale));
-      button7.SetColour(Color.OldLace);
-      button7.SetText("-");
-      button7.AddToDraw();
-      Button button8 = new Button((Layer) this, Align.Top | Align.Right, new Position(-256f, 0.0f), new Position(48f, 32f), new MouseFunction(this.gl.Grids.ResetActive));
-      button8.SetColour(Color.Green);
-      button8.SetText("Apply");
-      button8.AddToDraw();
-      this.AddTileSelectors();
-      new InputEvents((Layer) this).AddKey((Keys) 27, InputType.Pressed, new KeyFunction(this.Exit));
-    }
+        public GridLayer gl;
+        private BrawlerSource.Graphics.Text gridLayerText;
+        private BrawlerSource.Graphics.Text gridScaleText;
+        private Button btnMode;
 
-    public override void Update(GameTime gameTime)
-    {
-      this.gridLayerText.String = string.Format("{0}", (object) this.gl.Grids.Index);
-      this.gridScaleText.String = string.Format("{0}", (object) this.gl.Grids.GridScale);
-      base.Update(gameTime);
-    }
+        public override void Initilize()
+        {
+            base.Initilize();
+            new Panel((Layer)this, new Vector2(200f, 10f), Align.Top, new Position(0.0f)).AddToDraw();
+            Button button1 = new Button((Layer)this, Align.Top | Align.Left, new Position(0.0f, 0.0f),
+                new Position(48f, 32f), new MouseFunction(this.gl.Grids.New), 
+                new TouchFunction(this.gl.Grids.New));
+            button1.SetText("New");
+            button1.AddToDraw();
+            Button button2 = new Button((Layer)this, Align.Top | Align.Left, 
+                new Position(48f, 0.0f), new Position(48f, 32f), 
+                new MouseFunction(this.gl.Grids.Save),
+                new TouchFunction(this.gl.Grids.Save));
+            button2.SetText("Save");
+            button2.AddToDraw();
+            Button button3 = new Button((Layer)this, Align.Top | Align.Left, 
+                new Position(96f, 0.0f), new Position(48f, 32f), 
+                new MouseFunction(this.gl.Grids.Load),
+                new TouchFunction(this.gl.Grids.Load));
+            button3.SetText("Load");
+            button3.AddToDraw();
+            this.btnMode = new Button((Layer)this, Align.Top, 
+                new Position(-160f, 0.0f), new Position(96f, 32f), 
+                new MouseFunction(this.ToggleMode),
+                new TouchFunction(this.ToggleMode));
+            this.btnMode.SetText("Object Mode");
+            this.btnMode.AddToDraw();
+            BrawlerSource.Graphics.Text text1 = new BrawlerSource.Graphics.Text((Layer)this);
+            text1.FontPath = "Font";
+            text1.Colour = Color.Black;
+            text1.Depth = 1f;
+            text1.Scale = new Vector2(1f);
+            text1.Position = new Position(304f, -250f);
+            text1.String = "Layer";
+            BrawlerSource.Graphics.Text text2 = text1;
+            this.GameObjects.Add((GameObject)text2);
+            text2.AddToDraw();
+            Button button4 = new Button((Layer)this, Align.Top | Align.Right,
+                new Position(0.0f, 0.0f), new Position(32f), 
+                new MouseFunction(this.gl.Grids.IncreaseGridLayer),
+                new TouchFunction(this.gl.Grids.IncreaseGridLayer));
+            button4.SetColour(Color.OldLace);
+            button4.SetText("+");
+            button4.AddToDraw();
+            BrawlerSource.Graphics.Text text3 = new BrawlerSource.Graphics.Text((Layer)this);
+            text3.FontPath = "Font";
+            text3.Colour = Color.Black;
+            text3.Depth = 1f;
+            text3.Scale = new Vector2(1f);
+            text3.Position = new Position(416f, -250f);
+            this.gridLayerText = text3;
+            this.GameObjects.Add((GameObject)this.gridLayerText);
+            this.gridLayerText.AddToDraw();
+            Button button5 = new Button((Layer)this, Align.Top | Align.Right, 
+                new Position(-96f, 0.0f), new Position(32f), 
+                new MouseFunction(this.gl.Grids.DecreaseGridLayer),
+                new TouchFunction(this.gl.Grids.DecreaseGridLayer));
+            button5.SetColour(Color.OldLace);
+            button5.SetText("-");
+            button5.AddToDraw();
+            BrawlerSource.Graphics.Text text4 = new BrawlerSource.Graphics.Text((Layer)this);
+            text4.FontPath = "Font";
+            text4.Colour = Color.Black;
+            text4.Depth = 1f;
+            text4.Scale = new Vector2(1f);
+            text4.Position = new Position(-32f, -250f);
+            text4.String = "Size";
+            BrawlerSource.Graphics.Text text5 = text4;
+            this.GameObjects.Add((GameObject)text5);
+            text5.AddToDraw();
+            Button button6 = new Button((Layer)this, Align.Top | Align.Right, 
+                new Position(-336f, 0.0f), new Position(32f), 
+                new MouseFunction(this.gl.Grids.IncreaseGridScale),
+                new TouchFunction(this.gl.Grids.IncreaseGridScale));
+            button6.SetColour(Color.OldLace);
+            button6.SetText("+");
+            button6.AddToDraw();
+            BrawlerSource.Graphics.Text text6 = new BrawlerSource.Graphics.Text((Layer)this);
+            text6.FontPath = "Font";
+            text6.Colour = Color.Black;
+            text6.Depth = 1f;
+            text6.Scale = new Vector2(1f);
+            text6.Position = new Position(80f, -250f);
+            this.gridScaleText = text6;
+            this.GameObjects.Add((GameObject)this.gridScaleText);
+            this.gridScaleText.AddToDraw();
+            Button button7 = new Button((Layer)this, Align.Top | Align.Right,
+                new Position(-432f, 0.0f), new Position(32f),
+                new MouseFunction(this.gl.Grids.DecreaseGridScale), 
+                new TouchFunction(this.gl.Grids.DecreaseGridScale));
+            button7.SetColour(Color.OldLace);
+            button7.SetText("-");
+            button7.AddToDraw();
+            Button button8 = new Button((Layer)this, Align.Top | Align.Right,
+                new Position(-256f, 0.0f), new Position(48f, 32f),
+                new MouseFunction(this.gl.Grids.ResetActive), new TouchFunction(this.gl.Grids.ResetActive));
+            button8.SetColour(Color.Green);
+            button8.SetText("Apply");
+            button8.AddToDraw();
+            this.AddTileSelectors();
+            new InputEvents((Layer)this).AddKey((Keys)27, InputType.Pressed, new KeyFunction(this.Exit));
+        }
 
-    public void ToggleMode(object sender, MouseEventArgs e)
-    {
-      this.gl.Grids.ToggleMode();
-      this.btnMode.SetText(this.gl.Grids.IsTileMode ? "Tile Mode" : "Object Mode");
-    }
+        public override void Update(GameTime gameTime)
+        {
+            this.gridLayerText.String = string.Format("{0}", (object)this.gl.Grids.Index);
+            this.gridScaleText.String = string.Format("{0}", (object)this.gl.Grids.GridScale);
+            base.Update(gameTime);
+        }
+
+        public void ToggleMode(object sender, MouseEventArgs e)
+        {
+            this.gl.Grids.ToggleMode();
+            this.btnMode.SetText(this.gl.Grids.IsTileMode ? "Tile Mode" : "Object Mode");
+        }
+
+        public void ToggleMode(object sender, TouchEventArgs e)
+        {
+            this.gl.Grids.ToggleMode();
+            this.btnMode.SetText(this.gl.Grids.IsTileMode ? "Tile Mode" : "Object Mode");
+        }
 
         public void AddTileSelectors()
         {
@@ -135,7 +166,7 @@ namespace BrawlerSource.Framework.LevelEditor
             }
         }
 
-  
-    public void Exit(object sender, BrawlerEventArgs e) => this.Game.Exit();
-  }
+
+        public void Exit(object sender, BrawlerEventArgs e) => this.Game.Exit();
+    }
 }

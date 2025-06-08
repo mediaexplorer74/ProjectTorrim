@@ -46,24 +46,34 @@ namespace BrawlerSource.Menu
       sprite2.Position = new Position(0.0f, -144f);
       sprite2.Scale = new Vector2(0.5f);
       sprite2.AddToDraw();
-      Button button1 = new Button((Layer) this, Align.Centre, new Position(0.0f, -50f), new Position(256f, 40f), new MouseFunction(this.New));
+      Button button1 = new Button((Layer) this, Align.Centre, new Position(0.0f, -50f), 
+          new Position(256f, 40f),
+          new MouseFunction(this.New), new TouchFunction(this.New));
       button1.SetText("New");
       button1.SetTextScale(new Vector2(1f));
       button1.AddToDraw();
-      Button button2 = new Button((Layer) this, Align.Centre, new Position(0.0f, 0.0f), new Position(256f, 40f), new MouseFunction(this.Load));
+      Button button2 = new Button((Layer) this, Align.Centre, new Position(0.0f, 0.0f), 
+          new Position(256f, 40f), 
+          new MouseFunction(this.Load), new TouchFunction(this.Load));
       button2.SetText("Load");
       button2.SetTextScale(new Vector2(1f));
       button2.AddToDraw();
-      Button button3 = new Button((Layer) this, Align.Centre, new Position(0.0f, 50f), new Position(256f, 40f), new MouseFunction(this.ShowInstructions));
+      Button button3 = new Button((Layer) this, Align.Centre, new Position(0.0f, 50f), 
+          new Position(256f, 40f),
+          new MouseFunction(this.ShowInstructions), new TouchFunction(this.ShowInstructions));
       button3.SetText("Instructions");
       button3.SetTextScale(new Vector2(1f));
       button3.AddToDraw();
-      Button button4 = new Button((Layer) this, Align.Centre, new Position(0.0f, 100f), new Position(256f, 40f), new MouseFunction(this.ShowSettings));
+      Button button4 = new Button((Layer) this, Align.Centre, new Position(0.0f, 100f), 
+          new Position(256f, 40f), 
+          new MouseFunction(this.ShowSettings), new TouchFunction(this.ShowSettings));
       button4.SetText("Settings");
       button4.SetTextScale(new Vector2(1f));
       button4.AddToDraw();
       new InputEvents((Layer) this).AddKey((Keys) 27, InputType.Pressed, new KeyFunction(this.Exit));
-      Button button5 = new Button((Layer) this, Align.Centre, new Position(0.0f, 150f), new Position(256f, 40f), new MouseFunction(this.Exit));
+      Button button5 = new Button((Layer) this, Align.Centre, new Position(0.0f, 150f), 
+          new Position(256f, 40f), 
+          new MouseFunction(this.Exit), new TouchFunction(this.Exit));
       button5.SetText("Exit");
       button5.SetTextScale(new Vector2(1f));
       button5.AddToDraw();

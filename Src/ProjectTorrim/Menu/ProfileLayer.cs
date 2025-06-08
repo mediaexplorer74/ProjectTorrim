@@ -99,21 +99,27 @@ namespace BrawlerSource.Menu
       text2.IsHidden = true;
       this.myOverrideTitle = text2;
       this.myOverrideTitle.AddToDraw();
-      Button button1 = new Button((Layer) this, Align.Centre, new Position(256f, 0.0f), new Position(128f, 40f), new MouseFunction(this.LoadPhase2));
+      Button button1 = new Button((Layer) this, Align.Centre, 
+          new Position(256f, 0.0f), new Position(128f, 40f), 
+          new MouseFunction(this.LoadPhase2), new TouchFunction(this.LoadPhase2));
       button1.IsDisabled = true;
       button1.IsHidden = true;
       this.myOverrideConfirm = button1;
       this.myOverrideConfirm.SetText("Yes");
       this.myOverrideConfirm.SetTextScale(new Vector2(1f));
       this.myOverrideConfirm.AddToDraw();
-      Button button2 = new Button((Layer) this, Align.Centre, new Position(384f, 0.0f), new Position(128f, 40f), new MouseFunction(this.CancelOverride));
+      Button button2 = new Button((Layer) this, Align.Centre, 
+          new Position(384f, 0.0f), new Position(128f, 40f), 
+          new MouseFunction(this.CancelOverride), new TouchFunction(this.CancelOverride));
       button2.IsDisabled = true;
       button2.IsHidden = true;
       this.myOverrideCancel = button2;
       this.myOverrideCancel.SetText("Cancel");
       this.myOverrideCancel.SetTextScale(new Vector2(1f));
       this.myOverrideCancel.AddToDraw();
-      Button button3 = new Button((Layer) this, Align.Centre, new Position(0.0f, 100f), new Position(256f, 40f), new MouseFunction(this.Back));
+      Button button3 = new Button((Layer) this, Align.Centre, 
+          new Position(0.0f, 100f), new Position(256f, 40f), 
+          new MouseFunction(this.Back), new TouchFunction(this.Back));
       button3.SetText("Back");
       button3.SetTextScale(new Vector2(1f));
       button3.AddToDraw();
@@ -130,7 +136,9 @@ namespace BrawlerSource.Menu
 
     public void AddProfileButton(string profile, Position position)
     {
-      Button button = new Button((Layer) this, Align.Centre, position, new Position(256f, 40f), new MouseFunction(this.LoadPhase1));
+      Button button = new Button((Layer) this, Align.Centre, position, 
+          new Position(256f, 40f), 
+          new MouseFunction(this.LoadPhase1), new TouchFunction(this.LoadPhase1));
       button.Args.Add((object) profile);
       button.Args.Add((object) position);
       button.IsDisabled = !this.myIsNewMode && !File.Exists(string.Format(this.myGameSave, (object) profile));

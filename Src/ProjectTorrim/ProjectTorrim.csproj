@@ -169,6 +169,7 @@
     <Compile Include="Input\MobileInput.cs" />
     <Compile Include="Input\MouseButtons.cs" />
     <Compile Include="Input\MouseEventArgs.cs" />
+    <Compile Include="Input\TouchFunction.cs" />
     <Compile Include="Input\MouseFunction.cs" />
     <Compile Include="Input\MouseInput.cs" />
     <Compile Include="Input\TouchEventArgs.cs" />

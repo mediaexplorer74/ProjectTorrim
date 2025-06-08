@@ -27,7 +27,8 @@ namespace BrawlerSource
     {
       this.myTower = (Tower) Activator.CreateInstance(towerType, (object) this, (object) new Position());
       this.SubGameObjects.Remove((GameObject) this.myTower);
-      this.myButton = new Button((GameObject) this, Align.Bottom | Align.Left, position, new Position(80f, 32f), new MouseFunction(this.ShowInfo));
+      this.myButton = new Button((GameObject) this, Align.Bottom | Align.Left, position, 
+          new Position(80f, 32f), new MouseFunction(this.ShowInfo), new TouchFunction(this.ShowInfo));
       this.myButton.OnRealign += new EventHandler(this.MyButton_OnRealign);
       this.Position = this.myButton.Position;
       Sprite sprite = new Sprite((GameObject) this);

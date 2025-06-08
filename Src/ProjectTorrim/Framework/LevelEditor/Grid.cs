@@ -67,8 +67,19 @@ namespace BrawlerSource.Framework.LevelEditor
         Width = (float) ((int) this.mySize.X * this.GridScale),
         Height = (float) ((int) this.mySize.Y * this.GridScale)
       });
-      this.myCollider.AddMouseInput(MouseButtons.Left, InputType.Pressed, new MouseFunction(this.PlaceOnGrid));
-      this.myCollider.AddMouseInput(MouseButtons.Right, InputType.Pressed, new MouseFunction(this.RemoveSprite));
+
+      // mouse
+      this.myCollider.AddMouseInput(MouseButtons.Left, InputType.Pressed, 
+          new MouseFunction(this.PlaceOnGrid));
+      this.myCollider.AddMouseInput(MouseButtons.Right, InputType.Pressed,
+          new MouseFunction(this.RemoveSprite));
+
+      // touch-screen
+      this.myCollider.AddTouchInput(/*touchId*/0, InputType.Pressed, 
+          new TouchFunction(this.PlaceOnGrid));
+      this.myCollider.AddTouchInput(/*touchId2*/1, InputType.Pressed, 
+          new TouchFunction(this.RemoveSprite));
+            
       this.myGridSequence = new Sequence()
       {
         TexturePath = "Square_32",
@@ -96,7 +107,8 @@ namespace BrawlerSource.Framework.LevelEditor
 
     public Position GetGridPosition(Position pos)
     {
-      return ((pos + (this.mySize * (float) (this.GridScale / 2) - (float) (this.GridScale / 2))) / (float) this.GridScale).Round(0);
+      return ((pos + (this.mySize * (float) (this.GridScale / 2) 
+                - (float) (this.GridScale / 2))) / (float) this.GridScale).Round(0);
     }
 
     public Tile GetGridSquare(Position pos)
@@ -105,9 +117,13 @@ namespace BrawlerSource.Framework.LevelEditor
       return this.myTiles[(int) gridPosition.X, (int) gridPosition.Y];
     }
 
+
+    // * mouse * 
     public void PlaceOnGrid(object sender, MouseEventArgs e)
     {
-      TileSelector activeSelector = ((BrawlerSource.Framework.LevelEditor.LevelEditor) this.Level).ActiveSelector;
+      TileSelector activeSelector = ((BrawlerSource.Framework.LevelEditor.LevelEditor) this.Level)
+                .ActiveSelector;
+
       if (activeSelector == null)
         return;
       if (this.myIsTileMode)
@@ -132,7 +148,8 @@ namespace BrawlerSource.Framework.LevelEditor
         sequence.Width = this.GridScale;
         sequence.Height = this.GridScale;
         double myDepthIndex = (double) this.myDepthIndex;
-        DraggableDeletable draggableDeletable1 = new DraggableDeletable((GameObject) this, position, dimensions, sequence, (float) myDepthIndex);
+        DraggableDeletable draggableDeletable1 = new DraggableDeletable((GameObject) this, 
+            position, dimensions, sequence, (float) myDepthIndex);
         draggableDeletable1.IsResizeable = activeSelector.TileInfo.IsResizeable;
         draggableDeletable1.IsRepeating = activeSelector.TileInfo.IsRepeating;
         draggableDeletable1.SnapSize = this.GridScale;
@@ -141,8 +158,11 @@ namespace BrawlerSource.Framework.LevelEditor
         DraggableDeletable draggableDeletable2 = draggableDeletable1;
         draggableDeletable2.LoadContent();
         this.ObjectList.Add(draggableDeletable2);
-        ((BrawlerSource.Framework.LevelEditor.LevelEditor) this.Level).ActiveSelector.Button.SetColour(Color.White);
-        ((BrawlerSource.Framework.LevelEditor.LevelEditor) this.Level).ActiveSelector = (TileSelector) null;
+
+        ((BrawlerSource.Framework.LevelEditor.LevelEditor) this.Level)
+                    .ActiveSelector.Button.SetColour(Color.White);
+        ((BrawlerSource.Framework.LevelEditor.LevelEditor) this.Level)
+                    .ActiveSelector = (TileSelector) null;
       }
     }
 
@@ -153,6 +173,62 @@ namespace BrawlerSource.Framework.LevelEditor
       gridSquare.Sprite.Sequence = this.myGridSequence;
       gridSquare.Info = this.myDefaultInfo;
     }
+
+
+    // * Touch *
+    public void PlaceOnGrid(object sender, TouchEventArgs e)
+    {
+        TileSelector activeSelector = ((BrawlerSource.Framework.LevelEditor.LevelEditor)this.Level)
+                .ActiveSelector;
+        if (activeSelector == null)
+            return;
+        if (this.myIsTileMode)
+        {
+            Tile gridSquare = this.GetGridSquare(e.Position);
+            gridSquare.Sprite.Sequence = new Sequence()
+            {
+                TexturePath = activeSelector.TileInfo.SpriteName,
+                Width = this.GridScale,
+                Height = this.GridScale
+            };
+            gridSquare.Sprite.Scale = new Vector2(1f);
+            gridSquare.Sprite.LoadContent();
+            gridSquare.Info = activeSelector.TileInfo;
+        }
+        else
+        {
+            Position position = e.Position;
+            Position dimensions = new Position((float)this.GridScale);
+            Sequence sequence = new Sequence();
+            sequence.TexturePath = activeSelector.TileInfo.SpriteName;
+            sequence.Width = this.GridScale;
+            sequence.Height = this.GridScale;
+            double myDepthIndex = (double)this.myDepthIndex;
+            DraggableDeletable draggableDeletable1 = new DraggableDeletable((GameObject)this, 
+                position, dimensions, sequence, (float)myDepthIndex);
+            draggableDeletable1.IsResizeable = activeSelector.TileInfo.IsResizeable;
+            draggableDeletable1.IsRepeating = activeSelector.TileInfo.IsRepeating;
+            draggableDeletable1.SnapSize = this.GridScale;
+            draggableDeletable1.Info = activeSelector.TileInfo;
+            draggableDeletable1.Grid = this;
+            DraggableDeletable draggableDeletable2 = draggableDeletable1;
+            draggableDeletable2.LoadContent();
+            this.ObjectList.Add(draggableDeletable2);
+            ((BrawlerSource.Framework.LevelEditor.LevelEditor)this.Level).ActiveSelector
+                    .Button.SetColour(Color.White);
+            ((BrawlerSource.Framework.LevelEditor.LevelEditor)this.Level).ActiveSelector
+                    = (TileSelector)null;
+        }
+    }
+
+    public void RemoveSprite(object sender, TouchEventArgs e)
+    {
+        Tile gridSquare = this.GetGridSquare(e.Position);
+        gridSquare.Sprite.Scale = new Vector2((float)this.GridScale / 32f);
+        gridSquare.Sprite.Sequence = this.myGridSequence;
+        gridSquare.Info = this.myDefaultInfo;
+    }
+
 
     private void Clear()
     {
@@ -265,6 +341,7 @@ namespace BrawlerSource.Framework.LevelEditor
           this.myTiles[index2, index1].Sprite.LoadContent();
         }
       }
-    }
+    }//
+       
   }
 }

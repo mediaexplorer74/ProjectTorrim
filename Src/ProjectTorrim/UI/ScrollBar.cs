@@ -20,14 +20,22 @@ namespace BrawlerSource.UI
       : base(layer, scale, alignment, new Position(0.0f))
     {
       this.ScrollingObjects = new Dictionary<DrawableGameObject, Position>();
-      Button button1 = new Button((GameObject) this, alignment | Align.Left, new Position(0.0f), new Position(16f), new MouseFunction(this.ScrollLeft));
+      Button button1 = new Button((GameObject) this, alignment | Align.Left, 
+          new Position(0.0f), new Position(16f), new MouseFunction(this.ScrollLeft), 
+          new TouchFunction(this.ScrollLeft));
       button1.SetColour(Color.Gray);
       button1.SetText("<");
-      Button button2 = new Button((GameObject) this, alignment | Align.Right, new Position(0.0f), new Position(16f), new MouseFunction(this.ScrollRight));
+      Button button2 = new Button((GameObject) this, alignment | Align.Right, 
+          new Position(0.0f), new Position(16f), new MouseFunction(this.ScrollRight), 
+          new TouchFunction(this.ScrollRight));
       button2.SetColour(Color.Gray);
       button2.SetText(">");
-      this.mySlider = new Slider((GameObject) this, new Position(this.Layer.ViewCamera.WorldSize.X, 16f) - new Position(32f, 0.0f), 16, new Position(0.0f, (float) ((double) this.Layer.ViewCamera.WorldSize.Y / 2.0 - (double) this.Scale.Y / 2.0 - 4.0)));
-      this.mySlider.Cursor.Position = new Position(this.mySlider.Cursor.MinPosition.X, this.mySlider.Cursor.Position.Y);
+      this.mySlider = new Slider((GameObject) this, 
+          new Position(this.Layer.ViewCamera.WorldSize.X, 16f) - new Position(32f, 0.0f), 16, 
+          new Position(0.0f, (float) ((double) this.Layer.ViewCamera.WorldSize.Y / 2.0 
+          - (double) this.Scale.Y / 2.0 - 4.0)));
+      this.mySlider.Cursor.Position = new Position(this.mySlider.Cursor.MinPosition.X, 
+          this.mySlider.Cursor.Position.Y);
     }
 
     public void ScrollLeft(object sender, BrawlerEventArgs e)
@@ -52,7 +60,8 @@ namespace BrawlerSource.UI
       foreach (DrawableGameObject key in this.ScrollingObjects.Keys)
       {
         Position scrollingObject = this.ScrollingObjects[key];
-        key.Position = scrollingObject + new Position((float) ((double) key.Scale.X * (double) this.mySlider.Value * -1.0), 0.0f);
+        key.Position = scrollingObject + new Position((float) ((double) key.Scale.X 
+            * (double) this.mySlider.Value * -1.0), 0.0f);
       }
       base.Update(gameTime);
     }

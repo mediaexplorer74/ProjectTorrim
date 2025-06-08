@@ -69,7 +69,8 @@ namespace BrawlerSource.GameInfo
       text3.Position = new Position(0.0f, -96f);
       text3.AddToDraw();
       this.DisplayTowers(new Position(0.0f, -64f));
-      Button button = new Button((Layer) this, Align.Centre, new Position(0.0f, 184f), new Position(128f, 40f), new MouseFunction(this.Exit));
+      Button button = new Button((Layer) this, Align.Centre, new Position(0.0f, 184f), 
+          new Position(128f, 40f), new MouseFunction(this.Exit), new TouchFunction(this.Exit));
       button.SetText("Back");
       button.SetTextScale(new Vector2(1f));
       button.AddToDraw();

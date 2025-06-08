@@ -67,7 +67,8 @@ namespace BrawlerSource
     public virtual void Initilize()
     {
       this.TotalTime = TimeSpan.Zero;
-      this.CollisionMap = new CollisionMap(this, new Position(0.0f, 0.0f), new Position(9600f, 5400f), 4, 8);
+      this.CollisionMap = new CollisionMap(this, new Position(0.0f, 0.0f), 
+          new Position(9600f, 5400f), 4, 8);
       this.ViewCamera = new ViewCamera(this, new Vector2(960f, 540f));
       this.Cursor = new CursorCollider(this);
     }
@@ -104,7 +105,8 @@ namespace BrawlerSource
     {
       if (!this.IsEnabled || !this.DrawStates.HasFlag((Enum) this.Level.State))
         return;
-      spriteBatch.Begin((SpriteSortMode) 4, (BlendState) null, SamplerState.PointWrap, (DepthStencilState) null, (RasterizerState) null, (Effect) null, new Matrix?());
+      spriteBatch.Begin((SpriteSortMode) 4, (BlendState) null, SamplerState.PointWrap, 
+          (DepthStencilState) null, (RasterizerState) null, (Effect) null, new Matrix?());
       this.DrawableGameObjects.Draw(spriteBatch);
       spriteBatch.End();
     }
@@ -113,7 +115,8 @@ namespace BrawlerSource
 
     public void Load(string filename)
     {
-      MultiGridProperties multiGridProperties = JsonConvert.DeserializeObject<MultiGridProperties>(File.ReadAllText("Content/" + filename));
+      MultiGridProperties multiGridProperties = JsonConvert.DeserializeObject<MultiGridProperties>(
+          File.ReadAllText("Content/" + filename));
       for (int index1 = 0; index1 < multiGridProperties.Grids.Count; ++index1)
       {
         GridProperties grid = multiGridProperties.Grids[index1];
@@ -121,13 +124,19 @@ namespace BrawlerSource
         if (grid.Objects != null)
         {
           foreach (DraggableDeletableProperties deletableProperties in grid.Objects)
-            this.LoadTile(depth, grid.GridScale, deletableProperties.Info, deletableProperties.Position, deletableProperties.Dimensions);
+            this.LoadTile(depth, grid.GridScale, deletableProperties.Info, 
+                deletableProperties.Position, deletableProperties.Dimensions);
         }
         for (int index2 = 0; index2 < grid.Tiles.Count; ++index2)
         {
           List<TileInfo> tile = grid.Tiles[index2];
           for (int index3 = 0; index3 < tile.Count; ++index3)
-            this.LoadTile(depth, grid.GridScale, tile[index3], new Position((float) (index3 * grid.GridScale), (float) (index2 * grid.GridScale)) - new Position(960f, 540f) + (float) (grid.GridScale / 2));
+          {
+            this.LoadTile(depth, grid.GridScale, tile[index3],
+                new Position((float)(index3 * grid.GridScale),
+                (float)(index2 * grid.GridScale)) - new Position(960f, 540f)
+                + (float)(grid.GridScale / 2));
+          }
         }
       }
     }
@@ -165,7 +174,8 @@ namespace BrawlerSource
       }
       else
       {
-        if (!((GameObject) Activator.CreateInstance(Type.GetType(tile.ClassName), (object) this, (object) position, (object) dimensions, (object) depth) is DrawableGameObject instance))
+        if (!((GameObject) Activator.CreateInstance(Type.GetType(tile.ClassName), (object) this, 
+            (object) position, (object) dimensions, (object) depth) is DrawableGameObject instance))
           return;
         if (this.IsLoaded)
           instance.LoadContent();

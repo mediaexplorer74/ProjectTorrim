@@ -47,9 +47,15 @@ namespace BrawlerSource.Settings
       this.AddVolumeSlider("Master", this.Position + new Position(0.0f, -96f), this.Game.Master);
       this.AddVolumeSlider("Music", this.Position + new Position(0.0f, -32f), this.Game.Music);
       this.AddVolumeSlider("Effects", new Position(0.0f, 32f), this.Game.Effects);
-      new Button((GameObject) this, Align.Centre, new Position(-100f, 80f), new Position(80f, 48f), new MouseFunction(this.Game.Graphics.SetFullScreen)).SetText("Fullscreen");
-      new Button((GameObject) this, Align.Centre, new Position(0.0f, 80f), new Position(80f, 48f), new MouseFunction(this.Game.Graphics.SetFullScreenWindowed)).SetText("Fullscreen\nWindowed");
-      new Button((GameObject) this, Align.Centre, new Position(100f, 80f), new Position(80f, 48f), new MouseFunction(this.Game.Graphics.SetWindowed)).SetText("Windowed");
+      new Button((GameObject) this, Align.Centre, new Position(-100f, 80f), 
+          new Position(80f, 48f), new MouseFunction(this.Game.Graphics.SetFullScreen), 
+          new TouchFunction(this.Game.Graphics.SetFullScreen)).SetText("Fullscreen");
+      new Button((GameObject) this, Align.Centre, new Position(0.0f, 80f), 
+          new Position(80f, 48f), new MouseFunction(this.Game.Graphics.SetFullScreenWindowed), 
+          new TouchFunction(this.Game.Graphics.SetFullScreenWindowed)).SetText("Fullscreen\nWindowed");
+      new Button((GameObject) this, Align.Centre, new Position(100f, 80f), 
+          new Position(80f, 48f), new MouseFunction(this.Game.Graphics.SetWindowed), 
+          new TouchFunction(this.Game.Graphics.SetWindowed)).SetText("Windowed");
     }
 
     public void Exit(object sender, BrawlerEventArgs e)

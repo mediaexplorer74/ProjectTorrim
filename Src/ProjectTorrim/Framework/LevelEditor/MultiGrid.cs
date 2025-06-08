@@ -58,6 +58,8 @@ namespace BrawlerSource.Framework.LevelEditor
 
     public void IncreaseGridScale(object sender, MouseEventArgs e) => this.GridScale *= 2;
 
+    public void IncreaseGridScale(object sender, TouchEventArgs e) => this.GridScale *= 2;
+
     public void DecreaseGridScale(object sender, MouseEventArgs e)
     {
       if (this.GridScale <= 1)
@@ -65,7 +67,16 @@ namespace BrawlerSource.Framework.LevelEditor
       this.GridScale /= 2;
     }
 
+    public void DecreaseGridScale(object sender, TouchEventArgs e)
+    {
+      if (this.GridScale <= 1)
+        return;
+      this.GridScale /= 2;
+    }
+
     public void IncreaseGridLayer(object sender, MouseEventArgs e) => this.IncreaseGridLayer();
+
+    public void IncreaseGridLayer(object sender, TouchEventArgs e) => this.IncreaseGridLayer();
 
     public void IncreaseGridLayer()
     {
@@ -89,7 +100,16 @@ namespace BrawlerSource.Framework.LevelEditor
       this.GridScale = this.myGrids[this.Index].GridScale;
     }
 
-    public void ResetActive(object sender, MouseEventArgs e) => this.ResetActive();
+    public void DecreaseGridLayer(object sender, TouchEventArgs e)
+    {
+        this.myGrids[this.Index].SetDisabled(true);
+        if (this.Index > 0)
+            --this.Index;
+        this.myGrids[this.Index].SetDisabled(false);
+        this.GridScale = this.myGrids[this.Index].GridScale;
+    }
+
+        public void ResetActive(object sender, MouseEventArgs e) => this.ResetActive();
 
     public void ResetActive()
     {
@@ -98,7 +118,12 @@ namespace BrawlerSource.Framework.LevelEditor
           this.mySize / (float) this.GridScale, this.GridScale, this.IsTileMode);
     }
 
-    private void ClearAll()
+
+        public void ResetActive(object sender, TouchEventArgs e) => this.ResetActive();
+
+      
+
+        private void ClearAll()
     {
       foreach (GameObject grid in this.myGrids)
         grid.Dispose();
@@ -110,6 +135,8 @@ namespace BrawlerSource.Framework.LevelEditor
 
     public void New(object sender, MouseEventArgs e) => this.New();
 
+    public void New(object sender, TouchEventArgs e) => this.New();
+
     public void New()
     {
       this.ClearAll();
@@ -119,6 +146,8 @@ namespace BrawlerSource.Framework.LevelEditor
     public void Save(object sender, KeyEventArgs e) => this.Save();
 
     public void Save(object sender, MouseEventArgs e) => this.Save();
+
+    public void Save(object sender, TouchEventArgs e) => this.Save();
 
     public void Save()
     {
@@ -138,7 +167,9 @@ namespace BrawlerSource.Framework.LevelEditor
 
     public void Load(object sender, MouseEventArgs e) => this.Load();
 
-    public void Load()
+    public void Load(object sender, TouchEventArgs e) => this.Load();
+
+        public void Load()
     {
       StorageFolder appdataFolder = ApplicationData.Current.LocalFolder;
       this.ClearAll();

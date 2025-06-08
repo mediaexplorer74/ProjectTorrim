@@ -69,7 +69,9 @@ namespace BrawlerSource.Menu
       text4.Scale = new Vector2(0.5f);
       text4.Position = new Position(0.0f, 50f);
       text4.AddToDraw();
-      Button button = new Button((Layer) this, Align.Centre, new Position(0.0f, 100f), new Position(256f, 40f), new MouseFunction(this.Back));
+      Button button = new Button((Layer) this, Align.Centre, 
+          new Position(0.0f, 100f), new Position(256f, 40f), 
+          new MouseFunction(this.Back), new TouchFunction(this.Back));
       button.SetText("Back");
       button.SetTextScale(new Vector2(1f));
       button.AddToDraw();

@@ -15,8 +15,8 @@ namespace BrawlerSource.Input
     private static MouseState mouseState;
 
     public static Position GetPosition()
-    {
-      return new Position(MouseInput.mouseState.Position);
+    {     
+        return new Position(MouseInput.mouseState.Position);     
     }
 
     public static bool ButtonUp(MouseButtons mouseButton)

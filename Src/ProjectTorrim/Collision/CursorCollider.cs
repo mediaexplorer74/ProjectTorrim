@@ -32,10 +32,10 @@ namespace BrawlerSource.Collision
     public override void Update(GameTime gameTime)
     {
       Position pos1 = MouseInput.GetPosition();
-      if (pos1.ToVector2() != Vector2.Zero)
+      Position pos2 = MobileInput.GetPosition();
+
+      if (pos1.ToVector2() != Vector2.Zero )
         this.UpdatePosition(pos1);
-      
-      Position pos2 = MobileInput.GetPosition(); 
       if (pos2.ToVector2() != Vector2.Zero)
         this.UpdatePosition(pos2);
 

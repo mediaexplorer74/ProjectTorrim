@@ -17,6 +17,8 @@ namespace BrawlerSource.UI
   public class Button : Element
   {
     private MouseFunction Mouse_Click;
+    private TouchFunction Touch_Tap;
+
     public List<object> Args;
     private ClickableCollider myCollider;
     private bool myIsDisabled;
@@ -38,10 +40,11 @@ namespace BrawlerSource.UI
       Align alignment,
       Position position,
       Position dimensions,
-      MouseFunction func)
+      MouseFunction mousefunc,
+      TouchFunction touchfunc)
       : base(parent, dimensions.ToVector2(), alignment, position)
     {
-      this.Construct(alignment, position, dimensions, func);
+      this.Construct(alignment, position, dimensions, mousefunc, touchfunc);
     }
 
     public Button(
@@ -49,20 +52,25 @@ namespace BrawlerSource.UI
       Align alignment,
       Position position,
       Position dimensions,
-      MouseFunction func)
+      MouseFunction mousefunc,
+      TouchFunction touchfunc)
       : base(layer, dimensions.ToVector2(), alignment, position)
     {
-      this.Construct(alignment, position, dimensions, func);
+      this.Construct(alignment, position, dimensions, mousefunc, touchfunc);
     }
 
     protected virtual void Construct(
       Align alignment,
       Position position,
       Position dimensions,
-      MouseFunction func)
+      MouseFunction mousefunc,
+      TouchFunction touchfunc)
     {
       this.Args = new List<object>();
-      this.Mouse_Click = func;
+
+      this.Mouse_Click = mousefunc;
+      this.Touch_Tap = touchfunc;
+      
       this.Alignment = alignment;
       this.Offset = position;
       this.mySpriteFrontOffset = new Position(0.0f);
@@ -73,7 +81,13 @@ namespace BrawlerSource.UI
       {
         Dimensions = new Position(this.Scale)
       });
+
+      // mouse input registration
       this.myCollider.AddMouseInput(MouseButtons.Left, InputType.Pressed, new MouseFunction(this.OnClick));
+
+      // Touch input registration
+      this.myCollider.AddTouchInput(/*1*/0, InputType.Pressed, new TouchFunction(this.OnClick));
+
       Sprite sprite1 = new Sprite((GameObject) this);
       sprite1.Sequence = new Sequence()
       {
@@ -118,7 +132,9 @@ namespace BrawlerSource.UI
 
     private void FitSpriteFront()
     {
-      Vector2 vector2 = new Vector2((float) this.SpriteFront.Sequence.Width, (float) this.SpriteFront.Sequence.Height);
+      Vector2 vector2 = new Vector2((float) this.SpriteFront.Sequence.Width, 
+          (float) this.SpriteFront.Sequence.Height);
+
       if ((double) this.Scale.X >= (double) vector2.X && (double) this.Scale.Y >= (double) vector2.Y)
         return;
       this.SpriteFront.Scale = Vector2.Divide(this.Scale, vector2);
@@ -141,6 +157,13 @@ namespace BrawlerSource.UI
       this.Level.GameLayer?.ViewCamera.SetIsDragging(false);
       e.Args = this.Args;
       this.Mouse_Click(sender, e);
+    }
+
+    private void OnClick(object sender, TouchEventArgs e)
+    {
+        this.Level.GameLayer?.ViewCamera.SetIsDragging(false);
+        e.Args = this.Args;
+        this.Touch_Tap(sender, e);
     }
 
     public void SetText(string text) => this.TextMain.String = text;

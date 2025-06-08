@@ -49,10 +49,13 @@ namespace BrawlerSource.GameInfo
       typeList.Add(typeof (Chainer));
       for (int index = 0; index < typeList.Count; ++index)
         new Buyer((Layer) this, new Position((float) (96 * index), -4f), typeList[index]).AddToDraw();
-      Button button = new Button((Layer) this, Align.Top | Align.Right, new Position(), new Position(32f, 32f), new MouseFunction(this.PauseGame));
+      Button button = new Button((Layer) this, Align.Top | Align.Right, new Position(), 
+          new Position(32f, 32f), 
+          new MouseFunction(this.PauseGame), new TouchFunction(this.PauseGame));
       button.SetColour(new Color(Color.White, 0.5f));
       button.SetSprite("Cog", new Vector2?(new Vector2(32f, 32f)));
       button.AddToDraw();
+
       new InputEvents((Layer) this).AddKey((Keys) 80, InputType.Pressed, new KeyFunction(this.PauseGame));
     }
 

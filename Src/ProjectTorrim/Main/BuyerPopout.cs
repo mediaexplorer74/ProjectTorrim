@@ -68,11 +68,17 @@ namespace BrawlerSource
       this.AddStat("Range", this.myTower.Diameter, this.Position + new Position(32f, 0.0f));
       this.AddStat("Power", (float) this.myTower.ProjectileInfo.Damage, this.Position + new Position(32f, 32f));
       this.AddStat("Speed", (float) this.myTower.FireRate.TotalSeconds, this.Position + new Position(32f, 64f));
-      this.BuyButton = new Button((GameObject) this, Align.Centre, this.Position + new Position(8f, 112f), new Position(160f, 32f), new MouseFunction(this.SpawnTower));
+      this.BuyButton = new Button((GameObject) this, Align.Centre, 
+          this.Position + new Position(8f, 112f), new Position(160f, 32f), 
+          new MouseFunction(this.SpawnTower),
+          new TouchFunction(this.SpawnTower));
       this.BuyButton.SetColour(Color.LimeGreen);
       this.BuyButton.SetTextScale(new Vector2(0.75f));
       this.BuyButton.SetText(string.Format("Buy {0}d", (object) this.myTower.Cost));
-      this.myCloseButton = new Button((GameObject) this, Align.Centre, this.Position + new Position(136f, 112f), new Position(80f, 32f), new MouseFunction(((Buyer) this.Parent).HideInfo));
+      this.myCloseButton = new Button((GameObject) this, Align.Centre, 
+          this.Position + new Position(136f, 112f), new Position(80f, 32f), 
+          new MouseFunction(((Buyer) this.Parent).HideInfo),
+          new TouchFunction(((Buyer)this.Parent).HideInfo));
       this.myCloseButton.SetColour(Color.Firebrick);
       this.myCloseButton.SetTextScale(new Vector2(0.75f));
       this.myCloseButton.SetText("Close");
@@ -117,8 +123,11 @@ namespace BrawlerSource
       ((Buyer) this.Parent).HideInfo();
       if (!(e.GameTime.TotalGameTime - this.myLastSpawnTime > this.mySpawnRate))
         return;
+
       ((GameLevel) this.Level).Score -= this.myTower.Cost;
-      this.myNewTowerBuffer = (Tower) Activator.CreateInstance(this.myTower.GetType(), (object) this.Level.GameLayer, (object) this.Level.GameLayer.Cursor.Position);
+
+      this.myNewTowerBuffer = (Tower) Activator.CreateInstance(this.myTower.GetType(), 
+          (object) this.Level.GameLayer, (object) this.Level.GameLayer.Cursor.Position);
       this.myNewTowerBuffer.LoadContent();
       this.myNewTowerBuffer.AddToDraw();
       this.myNewTowerBuffer.Select();

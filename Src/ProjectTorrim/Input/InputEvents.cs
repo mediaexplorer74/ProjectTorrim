@@ -5,24 +5,34 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
 namespace BrawlerSource.Input
 {
-  public delegate void TouchFunction(object sender, TouchEventArgs e);
-
   public class InputEvents : GameObject
   {
-    private Dictionary<KeyValuePair<List<Keys>, InputType>, KeyFunction> KeyFunctions = new Dictionary<KeyValuePair<List<Keys>, InputType>, KeyFunction>();
+    private Dictionary<KeyValuePair<List<Keys>, InputType>, KeyFunction> KeyFunctions = 
+            new Dictionary<KeyValuePair<List<Keys>, InputType>, KeyFunction>();
+
     public HashSet<List<Keys>> KeyList = new HashSet<List<Keys>>();
-    public Dictionary<List<Keys>, List<InputType>> KeyInputTypes = new Dictionary<List<Keys>, List<InputType>>();
-    private Dictionary<KeyValuePair<List<MouseButtons>, InputType>, MouseFunction> MouseFunctions = new Dictionary<KeyValuePair<List<MouseButtons>, InputType>, MouseFunction>();
+
+    public Dictionary<List<Keys>, List<InputType>> KeyInputTypes = 
+            new Dictionary<List<Keys>, List<InputType>>();
+
+    private Dictionary<KeyValuePair<List<MouseButtons>, InputType>, MouseFunction> MouseFunctions 
+            = new Dictionary<KeyValuePair<List<MouseButtons>, InputType>, MouseFunction>();
+
     public HashSet<List<MouseButtons>> MouseList = new HashSet<List<MouseButtons>>();
-    public Dictionary<List<MouseButtons>, List<InputType>> MouseInputTypes = new Dictionary<List<MouseButtons>, List<InputType>>();
-    private Dictionary<KeyValuePair<List<int>, InputType>, TouchFunction> TouchFunctions = new();
-    public HashSet<List<int>> TouchList = new();
-    public Dictionary<List<int>, List<InputType>> TouchInputTypes = new();
+    public Dictionary<List<MouseButtons>, List<InputType>> MouseInputTypes 
+            = new Dictionary<List<MouseButtons>, List<InputType>>();
+
+    private Dictionary<KeyValuePair<List<int>, InputType>, TouchFunction> TouchFunctions = 
+            new Dictionary<KeyValuePair<List<int>, InputType>, TouchFunction>();
+    public HashSet<List<int>> TouchList = new HashSet<List<int>>();
+    public Dictionary<List<int>, List<InputType>> TouchInputTypes = 
+            new Dictionary<List<int>, List<InputType>>();
 
     public InputEvents(Layer layer)
       : base(layer)
@@ -70,6 +80,8 @@ namespace BrawlerSource.Input
             e.Type = inputType;
             e.Position = this.Layer.Cursor.Position;
             mouseFunction((object) this, e);
+            //TEST: Uncomment the line below to exit after handling the first mouse event
+            //return; // Exit after handling the first mouse event
           }
         }
       }
@@ -82,15 +94,16 @@ namespace BrawlerSource.Input
         {
           if (AreTouchesValid(touchIds, inputType))
           {
-            TouchFunction touchFunction = TouchFunctions[new KeyValuePair<List<int>, InputType>(touchIds, inputType)];
+            TouchFunction touchFunction = 
+                 TouchFunctions[new KeyValuePair<List<int>, InputType>(touchIds, inputType)];
             var firstTouch = touchCollection.Count > 0 ? touchCollection[0] : default;
-            TouchEventArgs e = new TouchEventArgs
-            {
-              GameTime = gameTime,
-              TouchIds = touchIds,
-              Type = inputType,
-              Position = new Position(firstTouch.Position)
-            };
+            TouchEventArgs e = new TouchEventArgs();            
+            e.GameTime = gameTime;
+            e.TouchIds = touchIds;
+            e.Type = inputType;
+            e.Position = new Position(firstTouch.Position);
+            //e.Position = this.Layer.Cursor.Position;
+
             touchFunction(this, e);
           }
         }
@@ -206,38 +219,45 @@ namespace BrawlerSource.Input
     public bool AreTouchesValid(List<int> touchIds, InputType inputType)
     {
       var touchCollection = TouchPanel.GetState();
-      HashSet<bool> boolSet = new();
+      HashSet<bool> boolSet = new HashSet<bool>();
       foreach (int id in touchIds)
       {
         bool flag = false;
         foreach (var touch in touchCollection)
         {
-          if (touch.Id == id)
+          if (true)//(touch.Id == id)
           {
+            //TEMP
+            //flag = true; // For now, we assume the touch is valid if it exists in the collection
             switch (inputType)
             {
-              case InputType.Pressed:
-                flag = touch.State == TouchLocationState.Pressed;
+                case InputType.Pressed:
+                  flag = MobileInput.ButtonPressed(touch.State); //touch.State == TouchLocationState.Pressed;
                 break;
-              case InputType.Released:
-                flag = touch.State == TouchLocationState.Released;
+                case InputType.Released:
+                  flag = MobileInput.ButtonReleased(touch.State);//touch.State == TouchLocationState.Released;
                 break;
-              case InputType.Held:
-                flag = touch.State == TouchLocationState.Moved;
+                case InputType.Held:
+                  flag = MobileInput.ButtonHeld(touch.State); //touch.State == TouchLocationState.Moved;
                 break;
-              case InputType.Up:
-                flag = touch.State == TouchLocationState.Invalid;
+                case InputType.Up:
+                  flag = MobileInput.ButtonUp(touch.State);//touch.State == TouchLocationState.Invalid;
                 break;
-              case InputType.Down:
-                flag = touch.State == TouchLocationState.Pressed ||
-                       touch.State == TouchLocationState.Moved;
+                case InputType.Down:
+                  flag = MobileInput.ButtonDown(touch.State);//touch.State == TouchLocationState.Pressed || touch.State == TouchLocationState.Moved;
                 break;
+                //case InputType.Moved:
+                //  flag = true;//touch.State == TouchLocationState.Pressed ||
+                            //touch.State == TouchLocationState.Moved;
+                //break;
+
+                }
             }
-          }
         }
         boolSet.Add(flag);
       }
       return !boolSet.Contains(false);
     }
-  }
+
+   }
 }

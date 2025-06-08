@@ -73,12 +73,18 @@ namespace BrawlerSource
       text2.Scale = new Vector2(0.5f);
       text2.Depth = 0.5f;
       this.myTowerDescriptionText = text2;
-      this.myRangeButton = new Button((GameObject) this, Align.Centre, this.Position + new Position(144f, -16f), new Position(64f, 32f), new MouseFunction(this.UpgradeRange));
+      this.myRangeButton = new Button((GameObject) this, Align.Centre,
+          this.Position + new Position(144f, -16f), new Position(64f, 32f), 
+          new MouseFunction(this.UpgradeRange), new TouchFunction(this.UpgradeRange));
       this.myRangeButton.SetColour(Color.LimeGreen);
-      this.myPowerButton = new Button((GameObject) this, Align.Centre, this.Position + new Position(144f, 16f), new Position(64f, 32f), new MouseFunction(this.UpgradePower));
+      this.myPowerButton = new Button((GameObject) this, Align.Centre, 
+          this.Position + new Position(144f, 16f), new Position(64f, 32f), 
+          new MouseFunction(this.UpgradePower), new TouchFunction(this.UpgradePower));
       this.myPowerButton.SetColour(Color.LimeGreen);
       this.myPowerButton.SetText("Power");
-      this.mySpeedButton = new Button((GameObject) this, Align.Centre, this.Position + new Position(144f, 48f), new Position(64f, 32f), new MouseFunction(this.UpgradeSpeed));
+      this.mySpeedButton = new Button((GameObject) this, Align.Centre, 
+          this.Position + new Position(144f, 48f), new Position(64f, 32f), 
+          new MouseFunction(this.UpgradeSpeed), new TouchFunction(this.UpgradeSpeed));
       this.mySpeedButton.SetColour(Color.LimeGreen);
       this.mySpeedButton.SetText("Speed");
       this.myStats = new Dictionary<string, Tuple<Text, Button>>();
@@ -102,14 +108,20 @@ namespace BrawlerSource
       text3.Scale = new Vector2(0.75f);
       text3.Depth = 0.5f;
       this.myTargetText = text3;
-      this.myTargetButton = new Button((GameObject) this, Align.Centre, this.Position + new Position(144f, 80f), new Position(64f, 32f), new MouseFunction(this.ChangeTarget));
+      this.myTargetButton = new Button((GameObject) this, Align.Centre, 
+          this.Position + new Position(144f, 80f), new Position(64f, 32f), 
+          new MouseFunction(this.ChangeTarget), new TouchFunction(this.ChangeTarget));
       this.myTargetButton.SetColour(Color.MonoGameOrange);
       this.myTargetButton.SetText("Mode");
-      this.mySellButton = new Button((GameObject) this, Align.Centre, this.Position + new Position(8f, 128f), new Position(160f, 32f), new MouseFunction(this.SellTower));
+      this.mySellButton = new Button((GameObject) this, Align.Centre, 
+          this.Position + new Position(8f, 128f), new Position(160f, 32f), 
+          new MouseFunction(this.SellTower), new TouchFunction(this.SellTower));
       this.mySellButton.SetColour(Color.LimeGreen);
       this.mySellButton.SetTextScale(new Vector2(0.75f));
       this.mySellButton.SetText("Sell");
-      this.myCloseButton = new Button((GameObject) this, Align.Centre, this.Position + new Position(136f, 128f), new Position(80f, 32f), new MouseFunction(this.HideInfo));
+      this.myCloseButton = new Button((GameObject) this, Align.Centre, 
+          this.Position + new Position(136f, 128f), new Position(80f, 32f), 
+          new MouseFunction(this.HideInfo), new TouchFunction(this.HideInfo));
       this.myCloseButton.SetColour(Color.Firebrick);
       this.myCloseButton.SetTextScale(new Vector2(0.75f));
       this.myCloseButton.SetText("Close");

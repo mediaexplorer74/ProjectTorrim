@@ -78,7 +78,7 @@ namespace BrawlerSource
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: Load state from previously suspended application
+                    //TODO: Load TouchState from previously suspended application
                 }
 
                 if (!e.PrelaunchActivated)
@@ -112,7 +112,7 @@ namespace BrawlerSource
         }
 
         /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
+        /// Invoked when application execution is being suspended.  Application TouchState is saved
         /// without knowing whether the application will be terminated or resumed with the contents
         /// of memory still intact.
         /// </summary>
@@ -121,7 +121,7 @@ namespace BrawlerSource
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            //TODO: Save application TouchState and stop any background activity
             deferral.Complete();
         }
     }
