@@ -1,4 +1,4 @@
-## ProjectTorrim v1.0 - uwp branch
+## ProjectTorrim v1.0 - master branch
 ![Logo](Images/logo.png)
 
 R.E. of ProjectTorrim (Windows version of game). Planned as some "UWP remake".
