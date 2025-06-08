@@ -20,13 +20,19 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>ProjectTorrim_TemporaryKey.pfx</PackageCertificateKeyFile>
     <MonoGamePlatform>WindowsStoreApp</MonoGamePlatform>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>5942631A25584E48AFD8F47B2AC80AC5CE504052</PackageCertificateThumbprint>
+    <AppxBundlePlatforms>arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>
+    </PackageCertificateThumbprint>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <LangVersion>latest</LangVersion>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -165,6 +171,7 @@
     <Compile Include="Input\MouseEventArgs.cs" />
     <Compile Include="Input\MouseFunction.cs" />
     <Compile Include="Input\MouseInput.cs" />
+    <Compile Include="Input\TouchEventArgs.cs" />
     <Compile Include="Main\Bases.cs" />
     <Compile Include="Main\BaseSpriteSequence.cs" />
     <Compile Include="Main\BasesProperties.cs" />
