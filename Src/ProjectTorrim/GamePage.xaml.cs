@@ -22,7 +22,7 @@ namespace BrawlerSource
     /// </summary>
     public partial class GamePage : Page
     {
-		readonly Game1 _game;
+		readonly BrawlerGame _game;
 
 		public GamePage()
         {
@@ -30,7 +30,7 @@ namespace BrawlerSource
 
 			// Create the game.
 			var launchArguments = string.Empty;
-            _game = MonoGame.Framework.XamlGame<Game1>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+            _game = MonoGame.Framework.XamlGame<BrawlerGame>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace BrawlerSource.GameInfo
     public int Score = 1000000;//250; // dirty hack :)
     private string myProfile;
 
-    public GameLevel(Game1 game, string profile)
+    public GameLevel(BrawlerGame game, string profile)
       : base(game)
     {
       this.myProfile = profile;

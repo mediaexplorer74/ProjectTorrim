@@ -169,7 +169,7 @@
     <Compile Include="Main\BaseSpriteSequence.cs" />
     <Compile Include="Main\BasesProperties.cs" />
     <Compile Include="Main\BrawlerEventArgs.cs" />
-    <Compile Include="Main\Game1.cs" />
+    <Compile Include="Main\BrawlerGame.cs" />
     <Compile Include="Main\Buyer.cs" />
     <Compile Include="Main\BuyerPopout.cs" />
     <Compile Include="Main\ContentGameObject.cs" />
@@ -734,9 +734,6 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="System.Runtime.Loader">
-      <Version>4.0.0-beta-22231</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup />

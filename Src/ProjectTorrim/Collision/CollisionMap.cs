@@ -33,8 +33,7 @@ namespace BrawlerSource.Collision
       CollisionLayer collisionLayer;
       if (!this.myCollisionLayers.TryGetValue(collider.CollisionLayer, out collisionLayer))
       {
-        collisionLayer = new CollisionLayer((GameObject) this, collider.CollisionLayer, 
-            this.myPosition, this.mySize, this.myCapacity, this.myDepth);
+        collisionLayer = new CollisionLayer((GameObject) this, collider.CollisionLayer, this.myPosition, this.mySize, this.myCapacity, this.myDepth);
         this.myCollisionLayers.Add(collider.CollisionLayer, collisionLayer);
       }
       collisionLayer.Add(collider);

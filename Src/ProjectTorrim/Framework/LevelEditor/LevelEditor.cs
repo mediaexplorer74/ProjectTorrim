@@ -19,7 +19,7 @@ namespace BrawlerSource.Framework.LevelEditor
   {
     public TileSelector ActiveSelector;
 
-    public LevelEditor(Game1 game)
+    public LevelEditor(BrawlerGame game)
       : base(game)
     {
       throw new UnauthorizedAccessException();
