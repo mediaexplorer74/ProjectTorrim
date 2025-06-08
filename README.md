@@ -35,20 +35,19 @@ Your army is seeking the entrance to hell itself but the gods do not want you to
 - UWP app : Min Win. SDK is 10240, Main Win. SDK is 19041  
 
 ## Status of UWP porting
-- R.E. completed
-- Init state  of UWP porting
+-  UWP porting completed (at all) but touch input feature is in draft state
 
 
 ## References
 - https://skeffles.itch.io/ Skeffles (C# / Game developer)
 - https://skeffles.itch.io/project-torrim Project Torrim (Tower Defence)
-- https://www.youtube.com/watch?v=Lt7a13pFH8o&list=PLWxJt3IMAUPtIyPT9qNvq-v62Zm-jLV4G GameDev "video-backlog" (from skeffles)
+- https://www.youtube.com/watch?v=Lt7a13pFH8o&list=PLWxJt3IMAUPtIyPT9qNvq-v62Zm-jLV4G GameDev "video-backlog" (from Skeffles)
 
 
 ## ToDo
 - Fix game screen-scaling on any W10M-based flagman (Lumia 950 / 950XL) or hi-def UWP
 - Improve touch control, add new swipes (main menu, gameplay)
-- Fix game storage (score?)
+- Fix game score ;) Maybe, Wave info needed to display… idk :)
 
 
 ## .

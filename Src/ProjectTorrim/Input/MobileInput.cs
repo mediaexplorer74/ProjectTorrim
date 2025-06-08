@@ -12,7 +12,21 @@ namespace BrawlerSource.Input
 {
   public static class MobileInput
   {
+    private static TouchLocation lastTouchLocation;
     private static Dictionary<TouchLocationState, Queue<TouchLocation>> myTouchState = new Dictionary<TouchLocationState, Queue<TouchLocation>>();
+
+    public static Position GetPosition()
+    {
+        TouchCollection state = TouchPanel.GetState();
+      
+        if (state.Count > 0)
+        {
+            lastTouchLocation = state[state.Count - 1];
+            return new Position(lastTouchLocation.Position);
+        }
+
+        return new Position(new Microsoft.Xna.Framework.Vector2(0,0));
+    }
 
     public static TouchLocation? TouchPerformed(TouchLocationState type)
     {

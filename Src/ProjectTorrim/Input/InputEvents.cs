@@ -1,16 +1,17 @@
-﻿
-// Type: BrawlerSource.Input.InputEvents
+﻿// Type: BrawlerSource.Input.InputEvents
 // Assembly: ProjectTorrim, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 // MVID: CC8AE86A-8582-48C1-AE0D-A25C0B7D84A4
-//
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using System.Collections.Generic;
 
 #nullable disable
 namespace BrawlerSource.Input
 {
+  public delegate void TouchFunction(object sender, TouchEventArgs e);
+
   public class InputEvents : GameObject
   {
     private Dictionary<KeyValuePair<List<Keys>, InputType>, KeyFunction> KeyFunctions = new Dictionary<KeyValuePair<List<Keys>, InputType>, KeyFunction>();
@@ -19,6 +20,9 @@ namespace BrawlerSource.Input
     private Dictionary<KeyValuePair<List<MouseButtons>, InputType>, MouseFunction> MouseFunctions = new Dictionary<KeyValuePair<List<MouseButtons>, InputType>, MouseFunction>();
     public HashSet<List<MouseButtons>> MouseList = new HashSet<List<MouseButtons>>();
     public Dictionary<List<MouseButtons>, List<InputType>> MouseInputTypes = new Dictionary<List<MouseButtons>, List<InputType>>();
+    private Dictionary<KeyValuePair<List<int>, InputType>, TouchFunction> TouchFunctions = new();
+    public HashSet<List<int>> TouchList = new();
+    public Dictionary<List<int>, List<InputType>> TouchInputTypes = new();
 
     public InputEvents(Layer layer)
       : base(layer)
@@ -34,6 +38,8 @@ namespace BrawlerSource.Input
     {
       if (!this.Game.IsActive)
         return;
+
+      // * keyboard handling *
       foreach (List<Keys> key in this.KeyList)
       {
         foreach (InputType inputType in this.KeyInputTypes[key])
@@ -49,6 +55,8 @@ namespace BrawlerSource.Input
           }
         }
       }
+
+      // * mouse  handling *
       foreach (List<MouseButtons> mouse in this.MouseList)
       {
         foreach (InputType inputType in this.MouseInputTypes[mouse])
@@ -62,6 +70,28 @@ namespace BrawlerSource.Input
             e.Type = inputType;
             e.Position = this.Layer.Cursor.Position;
             mouseFunction((object) this, e);
+          }
+        }
+      }
+
+      // * touch-screen handling *
+      var touchCollection = TouchPanel.GetState();
+      foreach (List<int> touchIds in TouchList)
+      {
+        foreach (InputType inputType in TouchInputTypes[touchIds])
+        {
+          if (AreTouchesValid(touchIds, inputType))
+          {
+            TouchFunction touchFunction = TouchFunctions[new KeyValuePair<List<int>, InputType>(touchIds, inputType)];
+            var firstTouch = touchCollection.Count > 0 ? touchCollection[0] : default;
+            TouchEventArgs e = new TouchEventArgs
+            {
+              GameTime = gameTime,
+              TouchIds = touchIds,
+              Type = inputType,
+              Position = new Position(firstTouch.Position)
+            };
+            touchFunction(this, e);
           }
         }
       }
@@ -99,6 +129,20 @@ namespace BrawlerSource.Input
         this.MouseInputTypes.Add(buttons, new List<InputType>());
       this.MouseInputTypes[buttons].Add(inputType);
       this.MouseFunctions.Add(new KeyValuePair<List<MouseButtons>, InputType>(buttons, inputType), func);
+    }
+
+    public void AddTouch(int touchId, InputType inputType, TouchFunction func)
+    {
+      AddTouches(new List<int> { touchId }, inputType, func);
+    }
+
+    public void AddTouches(List<int> touchIds, InputType inputType, TouchFunction func)
+    {
+      TouchList.Add(touchIds);
+      if (!TouchInputTypes.ContainsKey(touchIds))
+        TouchInputTypes.Add(touchIds, new List<InputType>());
+      TouchInputTypes[touchIds].Add(inputType);
+      TouchFunctions.Add(new KeyValuePair<List<int>, InputType>(touchIds, inputType), func);
     }
 
     public bool AreKeysValid(List<Keys> keys, InputType inputType)
@@ -153,6 +197,43 @@ namespace BrawlerSource.Input
           case InputType.Released:
             flag = MouseInput.ButtonReleased(mouseButton);
             break;
+        }
+        boolSet.Add(flag);
+      }
+      return !boolSet.Contains(false);
+    }
+
+    public bool AreTouchesValid(List<int> touchIds, InputType inputType)
+    {
+      var touchCollection = TouchPanel.GetState();
+      HashSet<bool> boolSet = new();
+      foreach (int id in touchIds)
+      {
+        bool flag = false;
+        foreach (var touch in touchCollection)
+        {
+          if (touch.Id == id)
+          {
+            switch (inputType)
+            {
+              case InputType.Pressed:
+                flag = touch.State == TouchLocationState.Pressed;
+                break;
+              case InputType.Released:
+                flag = touch.State == TouchLocationState.Released;
+                break;
+              case InputType.Held:
+                flag = touch.State == TouchLocationState.Moved;
+                break;
+              case InputType.Up:
+                flag = touch.State == TouchLocationState.Invalid;
+                break;
+              case InputType.Down:
+                flag = touch.State == TouchLocationState.Pressed ||
+                       touch.State == TouchLocationState.Moved;
+                break;
+            }
+          }
         }
         boolSet.Add(flag);
       }
