@@ -38,10 +38,6 @@ Your army is seeking the entrance to hell itself but the gods do not want you to
 - R.E. completed
 - Init state  of UWP porting
 
-## Bugs
-Feel free to leave a comment with any feedback
-
-If you find a bug please report it in the form here: Bug Report Form: https://docs.google.com/forms/d/e/1FAIpQLSc9uorcnY4pjWt9zJ02CR0_pkMlEQeXJgRGBMnBQGd6oJzTvg/viewform?usp=sf_link
 
 ## References
 - https://skeffles.itch.io/ Skeffles (C# / Game developer)
