@@ -82,7 +82,7 @@ namespace BrawlerSource.Collision
       {
         Collider c = collider;
         this.Colliders.Remove(c);
-        c.Parent.GetTypes().ForEach(t => this.TypeColliders[t].Remove(c));
+        c.Parent.GetTypes().ForEach((Action<System.Type>) (t => this.TypeColliders[t].Remove(c)));
       }
       this.myCollidersToRemove.Clear();
     }
@@ -96,7 +96,7 @@ namespace BrawlerSource.Collision
     private void CheckCollisions()
     {
       this.myTree.Clear();
-      this.myCurrentColliders = this.Colliders.Except<Collider>(this.myCollidersToRemove);
+      this.myCurrentColliders = this.Colliders.Except<Collider>((IEnumerable<Collider>) this.myCollidersToRemove);
       foreach (Collider currentCollider in this.myCurrentColliders)
       {
         Collider collider = currentCollider;
@@ -108,9 +108,7 @@ namespace BrawlerSource.Collision
           foreach (IIntersectionable key in collider.IntersectionOffsets.Keys)
           {
             IIntersectionable intersection = key;
-            foreach (var tuple 
-              in this.myTree.Quersert(intersection, collider, 
-               (d => (collider.HasChanged || d.Item2.HasChanged) && d.Item1.IsColliding(intersection))))
+            foreach (Tuple<IIntersectionable, Collider> tuple in this.myTree.Quersert(intersection, collider, (Func<Tuple<IIntersectionable, Collider>, bool>) (d => (collider.HasChanged || d.Item2.HasChanged) && d.Item1.IsColliding(intersection))))
               colliderSet.Add(tuple.Item2);
           }
           foreach (Collider second in colliderSet)

@@ -12,11 +12,11 @@ namespace BrawlerSource.Graphics
 {
   public class GraphicsManager : GraphicsDeviceManager
   {
-    public Game1 Game;
+    public BrawlerGame Game;
 
     public event EventHandler OnScreenResize;
 
-    public GraphicsManager(Game1 game)
+    public GraphicsManager(BrawlerGame game)
       : base((Microsoft.Xna.Framework.Game) game)
     {
       this.Game = game;

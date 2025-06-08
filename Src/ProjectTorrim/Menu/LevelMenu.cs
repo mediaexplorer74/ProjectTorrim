@@ -9,7 +9,7 @@ using System;
 #nullable disable
 namespace BrawlerSource.Menu
 {
-  public class LevelMenu(Game1 game) : Level(game)
+  public class LevelMenu(BrawlerGame game) : Level(game)
   {
     public MenuLayer MainMenu;
     public ProfileLayer ProfilePicker;

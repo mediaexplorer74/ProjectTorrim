@@ -145,10 +145,7 @@ namespace BrawlerSource
         this.myBaseSequences[0].PlaySequence(BaseSpriteSequence.Falling);
         this.myFallingSequences.Enqueue(0);
       }
-      int num = MathHelper.Clamp(
-          this.myHealth / (this.myMaxHealth / this.myBaseSequences.Count), 0,
-          this.myBaseSequences.Count);
-
+      int num = MathHelper.Clamp(this.myHealth / (this.myMaxHealth / this.myBaseSequences.Count), 0, this.myBaseSequences.Count);
       if (this.myLastBaseIndex != num && this.myLastBaseIndex >= 0)
       {
         for (int index = num + 1; index <= this.myLastBaseIndex; ++index)

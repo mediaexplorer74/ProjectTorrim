@@ -1,4 +1,4 @@
-# ProjectTorrim v1.0 - master branch
+## ProjectTorrim v1.0 - uwp branch
 ![Logo](Images/logo.png)
 
 R.E. of ProjectTorrim (Windows version of game). Planned as some "UWP remake".
@@ -42,7 +42,7 @@ Your army is seeking the entrance to hell itself but the gods do not want you to
 ## References
 - https://skeffles.itch.io/ Skeffles (C# / Game developer)
 - https://skeffles.itch.io/project-torrim Project Torrim (Tower Defence)
-- https://www.youtube.com/watch?v=Lt7a13pFH8o&list=PLWxJt3IMAUPtIyPT9qNvq-v62Zm-jLV4G GameDev "video-backlog" (from Skeffles)
+- https://www.youtube.com/watch?v=Lt7a13pFH8o&list=PLWxJt3IMAUPtIyPT9qNvq-v62Zm-jLV4G GameDev "video-backlog" (from skeffles)
 
 
 ## ToDo

@@ -14,7 +14,7 @@ namespace BrawlerSource.GameInfo
     private bool myHasWon;
     private GameProperties myProperties;
 
-    public EndLevel(Game1 game, bool hasWon, GameProperties properties)
+    public EndLevel(BrawlerGame game, bool hasWon, GameProperties properties)
       : base(game)
     {
       this.myHasWon = hasWon;
